@@ -1,0 +1,223 @@
+
+simoli.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BQ1
+  rotate: true
+  xy: 663, 371
+  size: 71, 55
+  orig: 71, 55
+  offset: 0, 0
+  index: -1
+BQ2
+  rotate: false
+  xy: 136, 105
+  size: 94, 58
+  orig: 94, 58
+  offset: 0, 0
+  index: -1
+BQ3
+  rotate: false
+  xy: 566, 383
+  size: 95, 59
+  orig: 95, 59
+  offset: 0, 0
+  index: -1
+BQ4
+  rotate: false
+  xy: 855, 427
+  size: 104, 83
+  orig: 104, 83
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 720, 376
+  size: 63, 74
+  orig: 63, 74
+  offset: 0, 0
+  index: -1
+body_w
+  rotate: false
+  xy: 447, 315
+  size: 45, 48
+  orig: 45, 48
+  offset: 0, 0
+  index: -1
+eye_1
+  rotate: false
+  xy: 296, 195
+  size: 93, 35
+  orig: 93, 35
+  offset: 0, 0
+  index: -1
+eye_2
+  rotate: false
+  xy: 2, 2
+  size: 75, 24
+  orig: 75, 24
+  offset: 0, 0
+  index: -1
+eye_3
+  rotate: false
+  xy: 447, 365
+  size: 74, 26
+  orig: 74, 26
+  offset: 0, 0
+  index: -1
+eye_4
+  rotate: true
+  xy: 380, 298
+  size: 84, 16
+  orig: 84, 16
+  offset: 0, 0
+  index: -1
+face
+  rotate: false
+  xy: 2, 28
+  size: 132, 138
+  orig: 132, 138
+  offset: 0, 0
+  index: -1
+fadai
+  rotate: false
+  xy: 566, 444
+  size: 139, 66
+  orig: 139, 66
+  offset: 0, 0
+  index: -1
+hair_B
+  rotate: false
+  xy: 151, 203
+  size: 143, 179
+  orig: 143, 179
+  offset: 0, 0
+  index: -1
+hair_F1
+  rotate: true
+  xy: 840, 379
+  size: 46, 85
+  orig: 46, 85
+  offset: 0, 0
+  index: -1
+hair_F2
+  rotate: true
+  xy: 151, 165
+  size: 36, 104
+  orig: 36, 104
+  offset: 0, 0
+  index: -1
+hair_L
+  rotate: true
+  xy: 707, 452
+  size: 58, 146
+  orig: 58, 146
+  offset: 0, 0
+  index: -1
+hair_L2
+  rotate: false
+  xy: 2, 168
+  size: 147, 214
+  orig: 147, 214
+  offset: 0, 0
+  index: -1
+hair_R
+  rotate: false
+  xy: 296, 232
+  size: 82, 150
+  orig: 82, 150
+  offset: 0, 0
+  index: -1
+hand_L1
+  rotate: true
+  xy: 79, 3
+  size: 23, 29
+  orig: 23, 29
+  offset: 0, 0
+  index: -1
+hand_L2
+  rotate: false
+  xy: 927, 379
+  size: 31, 46
+  orig: 31, 46
+  offset: 0, 0
+  index: -1
+hand_R1
+  rotate: false
+  xy: 232, 134
+  size: 23, 29
+  orig: 23, 29
+  offset: 0, 0
+  index: -1
+hand_R2
+  rotate: true
+  xy: 398, 393
+  size: 117, 166
+  orig: 117, 166
+  offset: 0, 0
+  index: -1
+jz1
+  rotate: false
+  xy: 785, 367
+  size: 53, 83
+  orig: 53, 83
+  offset: 0, 0
+  index: -1
+jz2
+  rotate: false
+  xy: 398, 311
+  size: 47, 80
+  orig: 47, 80
+  offset: 0, 0
+  index: -1
+leg_L1
+  rotate: true
+  xy: 960, 393
+  size: 25, 43
+  orig: 25, 43
+  offset: 0, 0
+  index: -1
+leg_L2
+  rotate: false
+  xy: 257, 171
+  size: 22, 30
+  orig: 22, 30
+  offset: 0, 0
+  index: -1
+leg_R1
+  rotate: false
+  xy: 494, 317
+  size: 26, 46
+  orig: 26, 46
+  offset: 0, 0
+  index: -1
+leg_R2
+  rotate: true
+  xy: 523, 368
+  size: 23, 29
+  orig: 23, 29
+  offset: 0, 0
+  index: -1
+lianhong
+  rotate: false
+  xy: 2, 384
+  size: 394, 126
+  orig: 394, 126
+  offset: 0, 0
+  index: -1
+toushi1
+  rotate: false
+  xy: 961, 420
+  size: 60, 90
+  orig: 60, 90
+  offset: 0, 0
+  index: -1
+toushi2
+  rotate: true
+  xy: 136, 34
+  size: 69, 78
+  orig: 69, 78
+  offset: 0, 0
+  index: -1

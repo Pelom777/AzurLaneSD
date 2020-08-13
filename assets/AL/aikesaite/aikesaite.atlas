@@ -1,0 +1,279 @@
+
+aikesaite.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bodyW
+  rotate: false
+  xy: 404, 76
+  size: 45, 48
+  orig: 45, 48
+  offset: 0, 0
+  index: -1
+eye_6_1
+  rotate: false
+  xy: 352, 126
+  size: 48, 33
+  orig: 48, 33
+  offset: 0, 0
+  index: -1
+eye_6_2
+  rotate: false
+  xy: 310, 2
+  size: 33, 25
+  orig: 33, 25
+  offset: 0, 0
+  index: -1
+eye_L1
+  rotate: false
+  xy: 463, 473
+  size: 47, 37
+  orig: 47, 37
+  offset: 0, 0
+  index: -1
+eye_L2
+  rotate: false
+  xy: 463, 381
+  size: 36, 14
+  orig: 36, 14
+  offset: 0, 0
+  index: -1
+eye_L3
+  rotate: false
+  xy: 463, 124
+  size: 26, 28
+  orig: 26, 28
+  offset: 0, 0
+  index: -1
+eye_R1
+  rotate: false
+  xy: 256, 197
+  size: 30, 38
+  orig: 30, 38
+  offset: 0, 0
+  index: -1
+eye_R2
+  rotate: false
+  xy: 140, 331
+  size: 26, 16
+  orig: 26, 16
+  offset: 0, 0
+  index: -1
+eye_R3
+  rotate: false
+  xy: 374, 25
+  size: 26, 38
+  orig: 26, 38
+  offset: 0, 0
+  index: -1
+face
+  rotate: false
+  xy: 2, 209
+  size: 136, 138
+  orig: 136, 138
+  offset: 0, 0
+  index: -1
+hair_B
+  rotate: false
+  xy: 2, 349
+  size: 165, 161
+  orig: 165, 161
+  offset: 0, 0
+  index: -1
+hair_B2
+  rotate: false
+  xy: 2, 69
+  size: 130, 138
+  orig: 130, 138
+  offset: 0, 0
+  index: -1
+hair_B3
+  rotate: true
+  xy: 140, 237
+  size: 90, 132
+  orig: 90, 132
+  offset: 0, 0
+  index: -1
+hair_F
+  rotate: false
+  xy: 169, 394
+  size: 158, 116
+  orig: 158, 116
+  offset: 0, 0
+  index: -1
+hair_L
+  rotate: false
+  xy: 416, 218
+  size: 40, 69
+  orig: 40, 69
+  offset: 0, 0
+  index: -1
+hair_R
+  rotate: true
+  xy: 169, 329
+  size: 63, 154
+  orig: 63, 154
+  offset: 0, 0
+  index: -1
+hand_L
+  rotate: true
+  xy: 289, 122
+  size: 37, 61
+  orig: 37, 61
+  offset: 0, 0
+  index: -1
+hand_R
+  rotate: false
+  xy: 365, 65
+  size: 37, 59
+  orig: 37, 59
+  offset: 0, 0
+  index: -1
+hat
+  rotate: true
+  xy: 233, 109
+  size: 70, 54
+  orig: 70, 54
+  offset: 0, 0
+  index: -1
+houbai
+  rotate: false
+  xy: 324, 229
+  size: 90, 58
+  orig: 90, 58
+  offset: 0, 0
+  index: -1
+jianzhuang_L
+  rotate: false
+  xy: 312, 56
+  size: 51, 64
+  orig: 51, 64
+  offset: 0, 0
+  index: -1
+jianzhuang_R
+  rotate: false
+  xy: 231, 31
+  size: 79, 76
+  orig: 79, 76
+  offset: 0, 0
+  index: -1
+leg_L
+  rotate: true
+  xy: 312, 29
+  size: 25, 60
+  orig: 25, 60
+  offset: 0, 0
+  index: -1
+leg_L2
+  rotate: true
+  xy: 200, 2
+  size: 25, 60
+  orig: 25, 60
+  offset: 0, 0
+  index: -1
+leg_R
+  rotate: true
+  xy: 402, 126
+  size: 26, 59
+  orig: 26, 59
+  offset: 0, 0
+  index: -1
+leg_R2
+  rotate: false
+  xy: 458, 244
+  size: 26, 59
+  orig: 26, 59
+  offset: 0, 0
+  index: -1
+mao
+  rotate: true
+  xy: 325, 289
+  size: 90, 126
+  orig: 90, 126
+  offset: 0, 0
+  index: -1
+maojin
+  rotate: false
+  xy: 2, 14
+  size: 120, 53
+  orig: 120, 53
+  offset: 0, 0
+  index: -1
+meimao_1
+  rotate: false
+  xy: 134, 117
+  size: 97, 62
+  orig: 97, 62
+  offset: 0, 0
+  index: -1
+meimao_3
+  rotate: false
+  xy: 404, 154
+  size: 82, 62
+  orig: 82, 62
+  offset: 0, 0
+  index: -1
+meimao_4
+  rotate: false
+  xy: 134, 54
+  size: 95, 61
+  orig: 95, 61
+  offset: 0, 0
+  index: -1
+sleep5
+  rotate: true
+  xy: 274, 241
+  size: 86, 48
+  orig: 86, 48
+  offset: 0, 0
+  index: -1
+suolian_L
+  rotate: true
+  xy: 329, 381
+  size: 129, 132
+  orig: 129, 132
+  offset: 0, 0
+  index: -1
+suolian_R
+  rotate: true
+  xy: 262, 3
+  size: 26, 46
+  orig: 26, 46
+  offset: 0, 0
+  index: -1
+toujin_1
+  rotate: true
+  xy: 140, 181
+  size: 54, 114
+  orig: 54, 114
+  offset: 0, 0
+  index: -1
+toujin_2
+  rotate: true
+  xy: 312, 161
+  size: 66, 90
+  orig: 66, 90
+  offset: 0, 0
+  index: -1
+weapon_L
+  rotate: true
+  xy: 453, 305
+  size: 74, 32
+  orig: 74, 32
+  offset: 0, 0
+  index: -1
+weapon_R
+  rotate: true
+  xy: 463, 397
+  size: 74, 43
+  orig: 74, 43
+  offset: 0, 0
+  index: -1
+weapon_R2
+  rotate: false
+  xy: 124, 12
+  size: 74, 40
+  orig: 74, 40
+  offset: 0, 0
+  index: -1

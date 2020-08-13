@@ -1,0 +1,300 @@
+
+33.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: true
+  xy: 293, 92
+  size: 64, 74
+  orig: 64, 74
+  offset: 0, 0
+  index: -1
+body_w
+  rotate: false
+  xy: 892, 156
+  size: 45, 48
+  orig: 45, 48
+  offset: 0, 0
+  index: -1
+ear
+  rotate: true
+  xy: 530, 96
+  size: 25, 30
+  orig: 25, 30
+  offset: 0, 0
+  index: -1
+eye_1_1
+  rotate: false
+  xy: 521, 123
+  size: 44, 30
+  orig: 44, 30
+  offset: 0, 0
+  index: -1
+eye_1_2
+  rotate: false
+  xy: 399, 52
+  size: 32, 28
+  orig: 32, 28
+  offset: 0, 0
+  index: -1
+eye_2_1
+  rotate: false
+  xy: 969, 207
+  size: 37, 17
+  orig: 37, 17
+  offset: 0, 0
+  index: -1
+eye_2_2
+  rotate: false
+  xy: 982, 148
+  size: 26, 17
+  orig: 26, 17
+  offset: 0, 0
+  index: -1
+eye_3_1
+  rotate: true
+  xy: 892, 128
+  size: 26, 38
+  orig: 26, 38
+  offset: 0, 0
+  index: -1
+eye_3_2
+  rotate: false
+  xy: 982, 167
+  size: 26, 38
+  orig: 26, 38
+  offset: 0, 0
+  index: -1
+eye_4_1
+  rotate: true
+  xy: 433, 51
+  size: 29, 22
+  orig: 29, 22
+  offset: 0, 0
+  index: -1
+eye_4_2
+  rotate: false
+  xy: 400, 28
+  size: 23, 22
+  orig: 23, 22
+  offset: 0, 0
+  index: -1
+face
+  rotate: false
+  xy: 2, 116
+  size: 133, 138
+  orig: 133, 138
+  offset: 0, 0
+  index: -1
+face_p
+  rotate: true
+  xy: 464, 95
+  size: 26, 31
+  orig: 26, 31
+  offset: 0, 0
+  index: -1
+fashi
+  rotate: true
+  xy: 777, 136
+  size: 49, 56
+  orig: 49, 56
+  offset: 0, 0
+  index: -1
+hair_B
+  rotate: false
+  xy: 2, 16
+  size: 133, 98
+  orig: 133, 98
+  offset: 0, 0
+  index: -1
+hair_B2
+  rotate: false
+  xy: 309, 158
+  size: 157, 96
+  orig: 157, 96
+  offset: 0, 0
+  index: -1
+hair_B3
+  rotate: true
+  xy: 468, 155
+  size: 99, 154
+  orig: 99, 154
+  offset: 0, 0
+  index: -1
+hair_F
+  rotate: true
+  xy: 874, 206
+  size: 48, 93
+  orig: 48, 93
+  offset: 0, 0
+  index: -1
+hair_L
+  rotate: true
+  xy: 624, 164
+  size: 90, 151
+  orig: 90, 151
+  offset: 0, 0
+  index: -1
+hair_R
+  rotate: true
+  xy: 777, 187
+  size: 67, 95
+  orig: 67, 95
+  offset: 0, 0
+  index: -1
+hair_R2
+  rotate: false
+  xy: 137, 20
+  size: 67, 146
+  orig: 67, 146
+  offset: 0, 0
+  index: -1
+hand_L
+  rotate: true
+  xy: 497, 96
+  size: 25, 31
+  orig: 25, 31
+  offset: 0, 0
+  index: -1
+hand_L2
+  rotate: true
+  xy: 369, 82
+  size: 26, 38
+  orig: 26, 38
+  offset: 0, 0
+  index: -1
+hand_R
+  rotate: true
+  xy: 409, 82
+  size: 26, 37
+  orig: 26, 37
+  offset: 0, 0
+  index: -1
+hand_R2
+  rotate: true
+  xy: 360, 50
+  size: 30, 37
+  orig: 30, 37
+  offset: 0, 0
+  index: -1
+leg_L
+  rotate: false
+  xy: 437, 110
+  size: 25, 46
+  orig: 25, 46
+  offset: 0, 0
+  index: -1
+leg_L2
+  rotate: false
+  xy: 351, 14
+  size: 23, 28
+  orig: 23, 28
+  offset: 0, 0
+  index: -1
+leg_R
+  rotate: true
+  xy: 567, 127
+  size: 26, 44
+  orig: 26, 44
+  offset: 0, 0
+  index: -1
+leg_R2
+  rotate: false
+  xy: 376, 21
+  size: 22, 27
+  orig: 22, 27
+  offset: 0, 0
+  index: -1
+meimao_1
+  rotate: false
+  xy: 206, 106
+  size: 85, 60
+  orig: 85, 60
+  offset: 0, 0
+  index: -1
+meimao_3
+  rotate: false
+  xy: 206, 44
+  size: 80, 60
+  orig: 80, 60
+  offset: 0, 0
+  index: -1
+paopao1
+  rotate: false
+  xy: 137, 168
+  size: 170, 86
+  orig: 170, 86
+  offset: 0, 0
+  index: -1
+sleep6
+  rotate: false
+  xy: 206, 2
+  size: 86, 40
+  orig: 86, 40
+  offset: 0, 0
+  index: -1
+weapon_L
+  rotate: false
+  xy: 835, 135
+  size: 55, 50
+  orig: 55, 50
+  offset: 0, 0
+  index: -1
+weapon_R
+  rotate: false
+  xy: 369, 110
+  size: 66, 46
+  orig: 66, 46
+  offset: 0, 0
+  index: -1
+weapon_missile_L
+  rotate: false
+  xy: 939, 153
+  size: 41, 51
+  orig: 41, 51
+  offset: 0, 0
+  index: -1
+weapon_missile_R
+  rotate: false
+  xy: 288, 44
+  size: 70, 46
+  orig: 70, 46
+  offset: 0, 0
+  index: -1
+weapon_missile_pR
+  rotate: true
+  xy: 932, 128
+  size: 23, 37
+  orig: 23, 37
+  offset: 0, 0
+  index: -1
+weapon_pao_L
+  rotate: false
+  xy: 969, 226
+  size: 53, 28
+  orig: 53, 28
+  offset: 0, 0
+  index: -1
+weapon_pao_R
+  rotate: false
+  xy: 969, 226
+  size: 53, 28
+  orig: 53, 28
+  offset: 0, 0
+  index: -1
+weapon_pao_pL
+  rotate: false
+  xy: 294, 12
+  size: 55, 30
+  orig: 55, 30
+  offset: 0, 0
+  index: -1
+weapon_pao_pR
+  rotate: false
+  xy: 464, 123
+  size: 55, 30
+  orig: 55, 30
+  offset: 0, 0
+  index: -1

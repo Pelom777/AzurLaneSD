@@ -1,0 +1,20 @@
+
+jicheT.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+che_mask
+  rotate: false
+  xy: 2, 2
+  size: 110, 158
+  orig: 110, 158
+  offset: 0, 0
+  index: -1
+mask
+  rotate: false
+  xy: 2, 162
+  size: 963, 635
+  orig: 963, 635
+  offset: 0, 0
+  index: -1

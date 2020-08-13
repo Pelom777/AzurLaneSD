@@ -1,0 +1,62 @@
+
+lenggui.png
+size: 1024,730
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 2, 254
+  size: 413, 474
+  orig: 413, 474
+  offset: 0, 0
+  index: -1
+foot
+  rotate: false
+  xy: 91, 78
+  size: 59, 76
+  orig: 59, 76
+  offset: 0, 0
+  index: -1
+hair
+  rotate: false
+  xy: 2, 2
+  size: 87, 250
+  orig: 87, 250
+  offset: 0, 0
+  index: -1
+hand_L
+  rotate: false
+  xy: 604, 658
+  size: 83, 70
+  orig: 83, 70
+  offset: 0, 0
+  index: -1
+hand_R
+  rotate: false
+  xy: 188, 199
+  size: 59, 53
+  orig: 59, 53
+  offset: 0, 0
+  index: -1
+money
+  rotate: false
+  xy: 91, 156
+  size: 95, 96
+  orig: 95, 96
+  offset: 0, 0
+  index: -1
+zhu
+  rotate: false
+  xy: 417, 582
+  size: 185, 146
+  orig: 185, 146
+  offset: 0, 0
+  index: -1
+zuanshi
+  rotate: false
+  xy: 417, 501
+  size: 100, 79
+  orig: 100, 79
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,48 @@
+
+nuofukedanchuan.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 2, 266
+  size: 446, 230
+  orig: 446, 230
+  offset: 0, 0
+  index: -1
+weapon1
+  rotate: true
+  xy: 450, 432
+  size: 64, 58
+  orig: 64, 58
+  offset: 0, 0
+  index: -1
+weapon2
+  rotate: true
+  xy: 450, 366
+  size: 64, 57
+  orig: 64, 57
+  offset: 0, 0
+  index: -1
+zx01
+  rotate: false
+  xy: 2, 90
+  size: 449, 86
+  orig: 449, 86
+  offset: 0, 0
+  index: -1
+zx02
+  rotate: false
+  xy: 2, 2
+  size: 449, 86
+  orig: 449, 86
+  offset: 0, 0
+  index: -1
+zx03
+  rotate: false
+  xy: 2, 178
+  size: 449, 86
+  orig: 449, 86
+  offset: 0, 0
+  index: -1
