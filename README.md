@@ -1,6 +1,10 @@
 # AzurLaneSD
 
-碧蓝航线SD小人图鉴：[https://pelom777.github.io/AzurLaneSD/](https://pelom777.github.io/AzurLaneSD/)
+碧蓝航线SD小人图鉴：
+
+github：[https://pelom777.github.io/AzurLaneSD/](https://pelom777.github.io/AzurLaneSD/)（国外节点）
+
+gitee：[http://pelom.gitee.io/azurlanesd/](http://pelom.gitee.io/azurlanesd/)（国内节点）
 
 - 图片资源较大，加载请耐心等待
 
