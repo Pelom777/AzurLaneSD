@@ -6,13 +6,7 @@
     <title>碧蓝航线SD小人图鉴</title>
 	<script src="./build/spine-webgl.js"></script>
 	<script src="./jquery-3.1.0.min.js"></script>
-	<style>
-		* { margin: 0; padding: 0; }
-		body, html { height: 100% }
-		canvas { position: absolute; width: 100% ;height: 100%; }
-		#copyright{ position: fixed; text-align: center; margin: 10px; right: 0; bottom: 0; color: white;}
-		#copyright a{ color: aqua;}
-	</style>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<canvas id="canvas"></canvas>
@@ -22,6 +16,26 @@
 			<span>Animation:</span><select id="animationList"></select>
 		</div>
 	</center>
+	<div class="spinner" id="loading">
+		<div class="spinner-container container1">
+			<div class="circle1"></div>
+			<div class="circle2"></div>
+			<div class="circle3"></div>
+			<div class="circle4"></div>
+		</div>
+		<div class="spinner-container container2">
+			<div class="circle1"></div>
+			<div class="circle2"></div>
+			<div class="circle3"></div>
+			<div class="circle4"></div>
+		</div>
+		<div class="spinner-container container3">
+			<div class="circle1"></div>
+			<div class="circle2"></div>
+			<div class="circle3"></div>
+			<div class="circle4"></div>
+		</div>
+	</div>
 	<div id="copyright">
         author:<a target="_blank" href="https://pelom.top/">Pelom</a><br>
         请勿用于商业用途
@@ -34,6 +48,7 @@ var json;
 var url="name.json";
 var change = false;
 var canvas;
+var loading;
 var shader;
 var batcher;
 var gl;
@@ -65,6 +80,7 @@ function init () {
 	// Setup canvas and WebGL context. We pass alpha: false to canvas.getContext() so we don't use premultiplied alpha when
 	// loading textures. That is handled separately by PolygonBatcher.
 	canvas = document.getElementById("canvas");
+	loading = document.getElementById("loading");
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 	var config = { alpha: false };
@@ -116,6 +132,7 @@ function choose(name){
 }
 
 function ready() {
+	loading.style.display = "block";
 	// Wait until the AssetManager has loaded all resources, then load the skeletons.
 	if (assetManager.isLoadingComplete()) {
 		// for(i in json){
@@ -131,6 +148,7 @@ function ready() {
 }
 
 function load() {
+	loading.style.display = "block";
 	// console.log("load:" + assetManager.isLoadingComplete());
 	// Wait until the AssetManager has loaded all resources, then load the skeletons.
 	if (assetManager.isLoadingComplete()) {
@@ -222,6 +240,7 @@ function setupUI () {
 }
 
 function render () {
+	loading.style.display = "none";
 	// console.log("render:" + assetManager.isLoadingComplete());
 	if(change){
 		load();
