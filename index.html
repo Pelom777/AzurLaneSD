@@ -107,18 +107,12 @@ function init () {
 	shapes = new spine.webgl.ShapeRenderer(gl);
 	assetManager = new spine.webgl.AssetManager(gl);
 
-	// Tell AssetManager to load the resources for each model, including the exported .json file, the .atlas file and the .png
+	// Tell AssetManager to load the resources for each model, including the exported .skel file, the .atlas file and the .png
 	// file for the atlas. We then wait until all resources are loaded in the load() method.
 
 	loadJson();
 
-	// for(var i in json){
-	// 	console.log(json[i]);
-	// 	assetManager.loadText("assets/AL/" + json[i] + "/" + json[i] + ".json");
-	// 	assetManager.loadTextureAtlas("assets/AL/" + json[i] + "/" + json[i] + ".atlas");
-	// }
-	
-	assetManager.loadText("assets/AL/" + chosenSkeleton + "/" + chosenSkeleton + ".json");
+	assetManager.loadBinary("assets/AL/" + chosenSkeleton + "/" + chosenSkeleton + ".skel");
 	assetManager.loadTextureAtlas("assets/AL/" + chosenSkeleton + "/" + chosenSkeleton + ".atlas");
 	
 	// setupUI();
@@ -128,7 +122,7 @@ function init () {
 
 function choose(name){
 	change = true;
-	assetManager.loadText("assets/AL/" + name + "/" + name + ".json");
+	assetManager.loadBinary("assets/AL/" + name + "/" + name + ".skel");
 	assetManager.loadTextureAtlas("assets/AL/" + name + "/" + name + ".atlas");
 	chosenSkeleton = name;
 }
@@ -158,16 +152,18 @@ function loadSkeleton (name, initialAnimation, premultipliedAlpha, skin) {
 	if (skin === undefined) skin = "default";
 
 	// Load the texture atlas using name.atlas from the AssetManager.
-	atlas = assetManager.get("assets/AL/" + name + "/" + name + ".atlas");
+	var atlas = assetManager.get("assets/AL/" + name + "/" + name + ".atlas");
 
 	// Create a AtlasAttachmentLoader that resolves region, mesh, boundingbox and path attachments
-	atlasLoader = new spine.AtlasAttachmentLoader(atlas);
+	var atlasLoader = new spine.AtlasAttachmentLoader(atlas);
 
-	// Create a SkeletonJson instance for parsing the .json file.
-	var skeletonJson = new spine.SkeletonJson(atlasLoader);
+	// Create a SkeletonBinary instance for parsing the .skel file.
+	// var skeletonBinary = new spine.SkeletonBinary(atlasLoader);
+	var skeletonBinary = new spine.SkeletonBinary(atlasLoader);
 
 	// Set the scale to apply during parsing, parse the file, and create a new skeleton.
-	var skeletonData = skeletonJson.readSkeletonData(assetManager.get("assets/AL/" + name + "/" + name + ".json"));
+	skeletonBinary.scale = 1;
+	var skeletonData = skeletonBinary.readSkeletonData(assetManager.get("assets/AL/" + name + "/" + name + ".skel"));
 	var skeleton = new spine.Skeleton(skeletonData);
 	skeleton.setSkinByName(skin);
 	var bounds = calculateBounds(skeleton);
