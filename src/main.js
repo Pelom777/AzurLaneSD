@@ -22,7 +22,7 @@ var swirlTime = 0;
 function checkMobile() {
 	if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		return true;
-	} 
+	}
 	else {
 		return false;
 	}
@@ -34,9 +34,9 @@ function loadJson() {
 	})
 }
 function init () {
+	isMobile = checkMobile();
 	// Setup canvas and WebGL context. We pass alpha: false to canvas.getContext() so we don't use premultiplied alpha when
 	// loading textures. That is handled separately by PolygonBatcher.
-	isMobile = checkMobile();
 	canvas = document.getElementById("canvas");
 	loading = document.getElementById("loading");
 	canvas.width = window.innerWidth;
