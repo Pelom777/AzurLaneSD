@@ -1,3 +1,4 @@
+var isMobile;
 var lastFrameTime = Date.now() / 1000;
 var json;
 var url="assets/name.json";
@@ -18,21 +19,24 @@ var activeSkeleton;
 var swirlEffect = new spine.SwirlEffect(0);
 var jitterEffect = new spine.JitterEffect(20, 20);
 var swirlTime = 0;
+function checkMobile() {
+	if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+		return true;
+	} 
+	else {
+		return false;
+	}
+}
 function loadJson() {
 	//load name list.
-    var request = new XMLHttpRequest();
-    request.open("get", url);
-    request.send(null);
-    request.onload = function () {
-        if (request.status == 200) {
-            json = JSON.parse(request.responseText);
-            // console.log(json);
-        }
-    }
+	$.getJSON(url, function(data){
+		json = eval(data);
+	})
 }
 function init () {
 	// Setup canvas and WebGL context. We pass alpha: false to canvas.getContext() so we don't use premultiplied alpha when
 	// loading textures. That is handled separately by PolygonBatcher.
+	isMobile = checkMobile();
 	canvas = document.getElementById("canvas");
 	loading = document.getElementById("loading");
 	canvas.width = window.innerWidth;
@@ -102,7 +106,7 @@ function loadSkeleton (name, initialAnimation, premultipliedAlpha, skin) {
 	// var skeletonBinary = new spine.SkeletonBinary(atlasLoader);
 	var skeletonBinary = new spine.SkeletonBinary(atlasLoader);
 	// Set the scale to apply during parsing, parse the file, and create a new skeleton.
-	skeletonBinary.scale = 1;
+	skeletonBinary.scale = isMobile ? 0.75 : 1;
 	var skeletonData = skeletonBinary.readSkeletonData(assetManager.get("assets/AL/" + name + "/" + name + ".skel"));
 	var skeleton = new spine.Skeleton(skeletonData);
 	skeleton.setSkinByName(skin);
