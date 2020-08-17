@@ -5531,10 +5531,6 @@ var spine;
 			if (skeletonMap != null) {
 				skeletonData.hash = skeletonMap.hash;
 				skeletonData.version = skeletonMap.spine;
-				if ("3.8.75" == skeletonData.version)
-					throw new Error("Unsupported skeleton data, please export with a newer version of Spine.");
-				skeletonData.x = skeletonMap.x;
-				skeletonData.y = skeletonMap.y;
 				skeletonData.width = skeletonMap.width;
 				skeletonData.height = skeletonMap.height;
 				skeletonData.fps = skeletonMap.fps;
@@ -5543,14 +5539,14 @@ var spine;
 			if (root.bones) {
 				for (var i = 0; i < root.bones.length; i++) {
 					var boneMap = root.bones[i];
-					var parent_5 = null;
+					var parent_2 = null;
 					var parentName = this.getValue(boneMap, "parent", null);
 					if (parentName != null) {
-						parent_5 = skeletonData.findBone(parentName);
-						if (parent_5 == null)
+						parent_2 = skeletonData.findBone(parentName);
+						if (parent_2 == null)
 							throw new Error("Parent bone not found: " + parentName);
 					}
-					var data = new spine.BoneData(skeletonData.bones.length, boneMap.name, parent_5);
+					var data = new spine.BoneData(skeletonData.bones.length, boneMap.name, parent_2);
 					data.length = this.getValue(boneMap, "length", 0) * scale;
 					data.x = this.getValue(boneMap, "x", 0) * scale;
 					data.y = this.getValue(boneMap, "y", 0) * scale;
@@ -5560,7 +5556,6 @@ var spine;
 					data.shearX = this.getValue(boneMap, "shearX", 0);
 					data.shearY = this.getValue(boneMap, "shearY", 0);
 					data.transformMode = SkeletonJson.transformModeFromString(this.getValue(boneMap, "transform", "normal"));
-					data.skinRequired = this.getValue(boneMap, "skin", false);
 					skeletonData.bones.push(data);
 				}
 			}
@@ -5591,7 +5586,6 @@ var spine;
 					var constraintMap = root.ik[i];
 					var data = new spine.IkConstraintData(constraintMap.name);
 					data.order = this.getValue(constraintMap, "order", 0);
-					data.skinRequired = this.getValue(constraintMap, "skin", false);
 					for (var j = 0; j < constraintMap.bones.length; j++) {
 						var boneName = constraintMap.bones[j];
 						var bone = skeletonData.findBone(boneName);
@@ -5603,12 +5597,8 @@ var spine;
 					data.target = skeletonData.findBone(targetName);
 					if (data.target == null)
 						throw new Error("IK target bone not found: " + targetName);
-					data.mix = this.getValue(constraintMap, "mix", 1);
-					data.softness = this.getValue(constraintMap, "softness", 0) * scale;
 					data.bendDirection = this.getValue(constraintMap, "bendPositive", true) ? 1 : -1;
-					data.compress = this.getValue(constraintMap, "compress", false);
-					data.stretch = this.getValue(constraintMap, "stretch", false);
-					data.uniform = this.getValue(constraintMap, "uniform", false);
+					data.mix = this.getValue(constraintMap, "mix", 1);
 					skeletonData.ikConstraints.push(data);
 				}
 			}
@@ -5617,7 +5607,6 @@ var spine;
 					var constraintMap = root.transform[i];
 					var data = new spine.TransformConstraintData(constraintMap.name);
 					data.order = this.getValue(constraintMap, "order", 0);
-					data.skinRequired = this.getValue(constraintMap, "skin", false);
 					for (var j = 0; j < constraintMap.bones.length; j++) {
 						var boneName = constraintMap.bones[j];
 						var bone = skeletonData.findBone(boneName);
@@ -5649,7 +5638,6 @@ var spine;
 					var constraintMap = root.path[i];
 					var data = new spine.PathConstraintData(constraintMap.name);
 					data.order = this.getValue(constraintMap, "order", 0);
-					data.skinRequired = this.getValue(constraintMap, "skin", false);
 					for (var j = 0; j < constraintMap.bones.length; j++) {
 						var boneName = constraintMap.bones[j];
 						var bone = skeletonData.findBone(boneName);
@@ -5677,50 +5665,18 @@ var spine;
 				}
 			}
 			if (root.skins) {
-				for (var i = 0; i < root.skins.length; i++) {
-					var skinMap = root.skins[i];
-					var skin = new spine.Skin(skinMap.name);
-					if (skinMap.bones) {
-						for (var ii = 0; ii < skinMap.bones.length; ii++) {
-							var bone = skeletonData.findBone(skinMap.bones[ii]);
-							if (bone == null)
-								throw new Error("Skin bone not found: " + skinMap.bones[i]);
-							skin.bones.push(bone);
-						}
-					}
-					if (skinMap.ik) {
-						for (var ii = 0; ii < skinMap.ik.length; ii++) {
-							var constraint = skeletonData.findIkConstraint(skinMap.ik[ii]);
-							if (constraint == null)
-								throw new Error("Skin IK constraint not found: " + skinMap.ik[i]);
-							skin.constraints.push(constraint);
-						}
-					}
-					if (skinMap.transform) {
-						for (var ii = 0; ii < skinMap.transform.length; ii++) {
-							var constraint = skeletonData.findTransformConstraint(skinMap.transform[ii]);
-							if (constraint == null)
-								throw new Error("Skin transform constraint not found: " + skinMap.transform[i]);
-							skin.constraints.push(constraint);
-						}
-					}
-					if (skinMap.path) {
-						for (var ii = 0; ii < skinMap.path.length; ii++) {
-							var constraint = skeletonData.findPathConstraint(skinMap.path[ii]);
-							if (constraint == null)
-								throw new Error("Skin path constraint not found: " + skinMap.path[i]);
-							skin.constraints.push(constraint);
-						}
-					}
-					for (var slotName in skinMap.attachments) {
-						var slot = skeletonData.findSlot(slotName);
-						if (slot == null)
+				for (var skinName in root.skins) {
+					var skinMap = root.skins[skinName];
+					var skin = new spine.Skin(skinName);
+					for (var slotName in skinMap) {
+						var slotIndex = skeletonData.findSlotIndex(slotName);
+						if (slotIndex == -1)
 							throw new Error("Slot not found: " + slotName);
-						var slotMap = skinMap.attachments[slotName];
+						var slotMap = skinMap[slotName];
 						for (var entryName in slotMap) {
-							var attachment = this.readAttachment(slotMap[entryName], skin, slot.index, entryName, skeletonData);
+							var attachment = this.readAttachment(slotMap[entryName], skin, slotIndex, entryName, skeletonData);
 							if (attachment != null)
-								skin.setAttachment(slot.index, entryName, attachment);
+								skin.setAttachment(slotIndex, entryName, attachment);
 						}
 					}
 					skeletonData.skins.push(skin);
@@ -5733,11 +5689,10 @@ var spine;
 				var skin = linkedMesh.skin == null ? skeletonData.defaultSkin : skeletonData.findSkin(linkedMesh.skin);
 				if (skin == null)
 					throw new Error("Skin not found: " + linkedMesh.skin);
-				var parent_6 = skin.getAttachment(linkedMesh.slotIndex, linkedMesh.parent);
-				if (parent_6 == null)
+				var parent_3 = skin.getAttachment(linkedMesh.slotIndex, linkedMesh.parent);
+				if (parent_3 == null)
 					throw new Error("Parent mesh not found: " + linkedMesh.parent);
-				linkedMesh.mesh.deformAttachment = linkedMesh.inheritDeform ? parent_6 : linkedMesh.mesh;
-				linkedMesh.mesh.setParentMesh(parent_6);
+				linkedMesh.mesh.setParentMesh(parent_3);
 				linkedMesh.mesh.updateUVs();
 			}
 			this.linkedMeshes.length = 0;
@@ -5748,11 +5703,6 @@ var spine;
 					data.intValue = this.getValue(eventMap, "int", 0);
 					data.floatValue = this.getValue(eventMap, "float", 0);
 					data.stringValue = this.getValue(eventMap, "string", "");
-					data.audioPath = this.getValue(eventMap, "audio", null);
-					if (data.audioPath != null) {
-						data.volume = this.getValue(eventMap, "volume", 1);
-						data.balance = this.getValue(eventMap, "balance", 0);
-					}
 					skeletonData.events.push(data);
 				}
 			}
@@ -5808,11 +5758,10 @@ var spine;
 					var color = this.getValue(map, "color", null);
 					if (color != null)
 						mesh.color.setFromString(color);
-					mesh.width = this.getValue(map, "width", 0) * scale;
-					mesh.height = this.getValue(map, "height", 0) * scale;
-					var parent_7 = this.getValue(map, "parent", null);
-					if (parent_7 != null) {
-						this.linkedMeshes.push(new LinkedMesh(mesh, this.getValue(map, "skin", null), slotIndex, parent_7, this.getValue(map, "deform", true)));
+					var parent_4 = this.getValue(map, "parent", null);
+					if (parent_4 != null) {
+						mesh.inheritDeform = this.getValue(map, "deform", true);
+						this.linkedMeshes.push(new LinkedMesh(mesh, this.getValue(map, "skin", null), slotIndex, parent_4));
 						return mesh;
 					}
 					var uvs = map.uvs;
@@ -5820,7 +5769,6 @@ var spine;
 					mesh.triangles = map.triangles;
 					mesh.regionUVs = uvs;
 					mesh.updateUVs();
-					mesh.edges = this.getValue(map, "edges", null);
 					mesh.hullLength = this.getValue(map, "hull", 0) * 2;
 					return mesh;
 				}
@@ -5920,7 +5868,7 @@ var spine;
 							var frameIndex = 0;
 							for (var i = 0; i < timelineMap.length; i++) {
 								var valueMap = timelineMap[i];
-								timeline.setFrame(frameIndex++, this.getValue(valueMap, "time", 0), valueMap.name);
+								timeline.setFrame(frameIndex++, valueMap.time, valueMap.name);
 							}
 							timelines.push(timeline);
 							duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
@@ -5933,7 +5881,7 @@ var spine;
 								var valueMap = timelineMap[i];
 								var color = new spine.Color();
 								color.setFromString(valueMap.color);
-								timeline.setFrame(frameIndex, this.getValue(valueMap, "time", 0), color.r, color.g, color.b, color.a);
+								timeline.setFrame(frameIndex, valueMap.time, color.r, color.g, color.b, color.a);
 								this.readCurve(valueMap, timeline, frameIndex);
 								frameIndex++;
 							}
@@ -5950,7 +5898,7 @@ var spine;
 								var dark = new spine.Color();
 								light.setFromString(valueMap.light);
 								dark.setFromString(valueMap.dark);
-								timeline.setFrame(frameIndex, this.getValue(valueMap, "time", 0), light.r, light.g, light.b, light.a, dark.r, dark.g, dark.b);
+								timeline.setFrame(frameIndex, valueMap.time, light.r, light.g, light.b, light.a, dark.r, dark.g, dark.b);
 								this.readCurve(valueMap, timeline, frameIndex);
 								frameIndex++;
 							}
@@ -5976,7 +5924,7 @@ var spine;
 							var frameIndex = 0;
 							for (var i = 0; i < timelineMap.length; i++) {
 								var valueMap = timelineMap[i];
-								timeline.setFrame(frameIndex, this.getValue(valueMap, "time", 0), this.getValue(valueMap, "angle", 0));
+								timeline.setFrame(frameIndex, valueMap.time, valueMap.angle);
 								this.readCurve(valueMap, timeline, frameIndex);
 								frameIndex++;
 							}
@@ -5985,11 +5933,9 @@ var spine;
 						}
 						else if (timelineName === "translate" || timelineName === "scale" || timelineName === "shear") {
 							var timeline = null;
-							var timelineScale = 1, defaultValue = 0;
-							if (timelineName === "scale") {
+							var timelineScale = 1;
+							if (timelineName === "scale")
 								timeline = new spine.ScaleTimeline(timelineMap.length);
-								defaultValue = 1;
-							}
 							else if (timelineName === "shear")
 								timeline = new spine.ShearTimeline(timelineMap.length);
 							else {
@@ -6000,8 +5946,8 @@ var spine;
 							var frameIndex = 0;
 							for (var i = 0; i < timelineMap.length; i++) {
 								var valueMap = timelineMap[i];
-								var x = this.getValue(valueMap, "x", defaultValue), y = this.getValue(valueMap, "y", defaultValue);
-								timeline.setFrame(frameIndex, this.getValue(valueMap, "time", 0), x * timelineScale, y * timelineScale);
+								var x = this.getValue(valueMap, "x", 0), y = this.getValue(valueMap, "y", 0);
+								timeline.setFrame(frameIndex, valueMap.time, x * timelineScale, y * timelineScale);
 								this.readCurve(valueMap, timeline, frameIndex);
 								frameIndex++;
 							}
@@ -6022,7 +5968,7 @@ var spine;
 					var frameIndex = 0;
 					for (var i = 0; i < constraintMap.length; i++) {
 						var valueMap = constraintMap[i];
-						timeline.setFrame(frameIndex, this.getValue(valueMap, "time", 0), this.getValue(valueMap, "mix", 1), this.getValue(valueMap, "softness", 0) * scale, this.getValue(valueMap, "bendPositive", true) ? 1 : -1, this.getValue(valueMap, "compress", false), this.getValue(valueMap, "stretch", false));
+						timeline.setFrame(frameIndex, valueMap.time, this.getValue(valueMap, "mix", 1), this.getValue(valueMap, "bendPositive", true) ? 1 : -1);
 						this.readCurve(valueMap, timeline, frameIndex);
 						frameIndex++;
 					}
@@ -6039,7 +5985,7 @@ var spine;
 					var frameIndex = 0;
 					for (var i = 0; i < constraintMap.length; i++) {
 						var valueMap = constraintMap[i];
-						timeline.setFrame(frameIndex, this.getValue(valueMap, "time", 0), this.getValue(valueMap, "rotateMix", 1), this.getValue(valueMap, "translateMix", 1), this.getValue(valueMap, "scaleMix", 1), this.getValue(valueMap, "shearMix", 1));
+						timeline.setFrame(frameIndex, valueMap.time, this.getValue(valueMap, "rotateMix", 1), this.getValue(valueMap, "translateMix", 1), this.getValue(valueMap, "scaleMix", 1), this.getValue(valueMap, "shearMix", 1));
 						this.readCurve(valueMap, timeline, frameIndex);
 						frameIndex++;
 					}
@@ -6047,9 +5993,9 @@ var spine;
 					duration = Math.max(duration, timeline.frames[(timeline.getFrameCount() - 1) * spine.TransformConstraintTimeline.ENTRIES]);
 				}
 			}
-			if (map.path) {
-				for (var constraintName in map.path) {
-					var constraintMap = map.path[constraintName];
+			if (map.paths) {
+				for (var constraintName in map.paths) {
+					var constraintMap = map.paths[constraintName];
 					var index = skeletonData.findPathConstraintIndex(constraintName);
 					if (index == -1)
 						throw new Error("Path constraint not found: " + constraintName);
@@ -6073,7 +6019,7 @@ var spine;
 							var frameIndex = 0;
 							for (var i = 0; i < timelineMap.length; i++) {
 								var valueMap = timelineMap[i];
-								timeline.setFrame(frameIndex, this.getValue(valueMap, "time", 0), this.getValue(valueMap, timelineName, 0) * timelineScale);
+								timeline.setFrame(frameIndex, valueMap.time, this.getValue(valueMap, timelineName, 0) * timelineScale);
 								this.readCurve(valueMap, timeline, frameIndex);
 								frameIndex++;
 							}
@@ -6086,7 +6032,7 @@ var spine;
 							var frameIndex = 0;
 							for (var i = 0; i < timelineMap.length; i++) {
 								var valueMap = timelineMap[i];
-								timeline.setFrame(frameIndex, this.getValue(valueMap, "time", 0), this.getValue(valueMap, "rotateMix", 1), this.getValue(valueMap, "translateMix", 1));
+								timeline.setFrame(frameIndex, valueMap.time, this.getValue(valueMap, "rotateMix", 1), this.getValue(valueMap, "translateMix", 1));
 								this.readCurve(valueMap, timeline, frameIndex);
 								frameIndex++;
 							}
@@ -6138,7 +6084,7 @@ var spine;
 											deform[i] += vertices[i];
 									}
 								}
-								timeline.setFrame(frameIndex, this.getValue(valueMap, "time", 0), deform);
+								timeline.setFrame(frameIndex, valueMap.time, deform);
 								this.readCurve(valueMap, timeline, frameIndex);
 								frameIndex++;
 							}
@@ -6178,7 +6124,7 @@ var spine;
 							if (drawOrder[i] == -1)
 								drawOrder[i] = unchanged[--unchangedIndex];
 					}
-					timeline.setFrame(frameIndex++, this.getValue(drawOrderMap, "time", 0), drawOrder);
+					timeline.setFrame(frameIndex++, drawOrderMap.time, drawOrder);
 				}
 				timelines.push(timeline);
 				duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
@@ -6191,15 +6137,11 @@ var spine;
 					var eventData = skeletonData.findEvent(eventMap.name);
 					if (eventData == null)
 						throw new Error("Event not found: " + eventMap.name);
-					var event_6 = new spine.Event(spine.Utils.toSinglePrecision(this.getValue(eventMap, "time", 0)), eventData);
-					event_6.intValue = this.getValue(eventMap, "int", eventData.intValue);
-					event_6.floatValue = this.getValue(eventMap, "float", eventData.floatValue);
-					event_6.stringValue = this.getValue(eventMap, "string", eventData.stringValue);
-					if (event_6.data.audioPath != null) {
-						event_6.volume = this.getValue(eventMap, "volume", 1);
-						event_6.balance = this.getValue(eventMap, "balance", 0);
-					}
-					timeline.setFrame(frameIndex++, event_6);
+					var event_5 = new spine.Event(spine.Utils.toSinglePrecision(eventMap.time), eventData);
+					event_5.intValue = this.getValue(eventMap, "int", eventData.intValue);
+					event_5.floatValue = this.getValue(eventMap, "float", eventData.floatValue);
+					event_5.stringValue = this.getValue(eventMap, "string", eventData.stringValue);
+					timeline.setFrame(frameIndex++, event_5);
 				}
 				timelines.push(timeline);
 				duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
@@ -6210,13 +6152,13 @@ var spine;
 			skeletonData.animations.push(new spine.Animation(name, timelines, duration));
 		};
 		SkeletonJson.prototype.readCurve = function (map, timeline, frameIndex) {
-			if (!map.hasOwnProperty("curve"))
+			if (!map.curve)
 				return;
-			if (map.curve == "stepped")
+			if (map.curve === "stepped")
 				timeline.setStepped(frameIndex);
-			else {
+			else if (Object.prototype.toString.call(map.curve) === '[object Array]') {
 				var curve = map.curve;
-				timeline.setCurve(frameIndex, curve, this.getValue(map, "c2", 0), this.getValue(map, "c3", 1), this.getValue(map, "c4", 1));
+				timeline.setCurve(frameIndex, curve[0], curve[1], curve[2], curve[3]);
 			}
 		};
 		SkeletonJson.prototype.getValue = function (map, prop, defaultValue) {
@@ -6280,12 +6222,11 @@ var spine;
 	}());
 	spine.SkeletonJson = SkeletonJson;
 	var LinkedMesh = (function () {
-		function LinkedMesh(mesh, skin, slotIndex, parent, inheritDeform) {
+		function LinkedMesh(mesh, skin, slotIndex, parent) {
 			this.mesh = mesh;
 			this.skin = skin;
 			this.slotIndex = slotIndex;
 			this.parent = parent;
-			this.inheritDeform = inheritDeform;
 		}
 		return LinkedMesh;
 	}());

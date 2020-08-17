@@ -1,8 +1,11 @@
 var isMobile;
 var lastFrameTime = Date.now() / 1000;
-var json;
-var url="assets/name.json";
+var nameList;
+var byJsonList;
+var nameUrl = "assets/name.json";
+var byJsonUrl = "assets/byJson.json";
 var change = false;
+var byJson = false;
 var canvas;
 var loading;
 var shader;
@@ -19,20 +22,19 @@ var activeSkeleton;
 function checkMobile() {
 	if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		return true;
-	}
-	else {
+	} else {
 		return false;
 	}
 }
 function setupUI () {
 	//load name list.
-	$.getJSON(url, function(data){
-		json = eval(data);
+	$.getJSON(nameUrl, function(data){
+		nameList = eval(data);
 		
 		//set options
 		var skeletonList = $("#skeletonList");
-		for (var i in json) {
-			var skeletonName = json[i];
+		for (var i in nameList) {
+			var skeletonName = nameList[i];
 			var option = $("<option></option>");
 			option.attr("value", skeletonName).text(skeletonName);
 			if (skeletonName === chosenSkeleton) option.attr("selected", "selected");
@@ -41,6 +43,9 @@ function setupUI () {
 		skeletonList.change(function() {
 			choose($("#skeletonList option:selected").text());
 		})
+	})
+	$.getJSON(byJsonUrl, function(data){
+		byJsonList = eval(data);
 	})
 
 	//Selectable searchbox
@@ -68,8 +73,8 @@ function setupUI () {
 	$("#skeletonBox").bind("input", function(){
 		var skeletonList = $("#skeletonList");
 		skeletonList.html("");
-		for(i in json){
-			var skeletonName = json[i];
+		for(i in nameList){
+			var skeletonName = nameList[i];
 			if(skeletonName.substring(0, this.value.length).indexOf(this.value) == 0){
 				var option = $("<option></option>").text(skeletonName);
 				skeletonList.append(option);
@@ -116,8 +121,18 @@ function init () {
 }
 function choose(name){
 	if(name === chosenSkeleton) return;
+	for(i in byJsonList){
+		if(name === byJsonList[i]){
+			byJson = true;
+			break;
+		}
+	}
 	change = true;
-	assetManager.loadBinary("assets/AL/" + name + "/" + name + ".skel");
+	if(byJson){
+		assetManager.loadText("assets/AL/" + name + "/" + name + ".json");
+	} else {
+		assetManager.loadBinary("assets/AL/" + name + "/" + name + ".skel");
+	}
 	assetManager.loadTextureAtlas("assets/AL/" + name + "/" + name + ".atlas");
 	chosenSkeleton = name;
 }
@@ -125,11 +140,9 @@ function load() {
 	loading.style.display = "";
 	// Wait until the AssetManager has loaded all resources, then load the skeletons.
 	if (assetManager.isLoadingComplete()) {
-		// for(i in json){
-		// 	skeletons[json[i]] = loadSkeleton(json[i], "normal", false);
-		// }
 		activeSkeleton = loadSkeleton(chosenSkeleton, "normal", false);
 		change = false;
+		byJson = false;
 		setupAnimationUI();
 		requestAnimationFrame(render);
 	} else {
@@ -147,14 +160,26 @@ function loadSkeleton (name, initialAnimation, premultipliedAlpha, skin) {
 	var skeletonBinary = new spine.SkeletonBinary(atlasLoader);
 	// Set the scale to apply during parsing, parse the file, and create a new skeleton.
 	skeletonBinary.scale = isMobile ? 0.75 : 1;
-	var skeletonData = skeletonBinary.readSkeletonData(assetManager.get("assets/AL/" + name + "/" + name + ".skel"));
+	var skeletonData;
+	if(byJson){
+		var skeletonJson = new spine.SkeletonJson(atlasLoader);
+		skeletonData = skeletonJson.readSkeletonData(assetManager.get("assets/AL/" + name + "/" + name + ".json"));
+	} else {
+		skeletonData = skeletonBinary.readSkeletonData(assetManager.get("assets/AL/" + name + "/" + name + ".skel"));
+	}
 	var skeleton = new spine.Skeleton(skeletonData);
 	skeleton.setSkinByName(skin);
 	var bounds = calculateBounds(skeleton);
 	// Create an AnimationState, and set the initial animation in looping mode.
 	animationStateData = new spine.AnimationStateData(skeleton.data);
 	var animationState = new spine.AnimationState(animationStateData);
-	animationState.setAnimation(0, initialAnimation, true);
+	try{
+		animationState.setAnimation(0, initialAnimation, true);
+	} catch(err) {
+		console.log(err);
+		initialAnimation = skeleton.data.animations[0].name;
+		animationState.setAnimation(0, initialAnimation, true);
+	}
 	// Pack everything up and return to caller.
 	return { skeleton: skeleton, state: animationState, bounds: bounds, premultipliedAlpha: premultipliedAlpha };
 }
