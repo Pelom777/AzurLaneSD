@@ -3,7 +3,6 @@ var lastFrameTime = Date.now() / 1000;
 var json;
 var url="assets/name.json";
 var change = false;
-var loaded = false;
 var canvas;
 var loading;
 var shader;
@@ -16,9 +15,7 @@ var debugRenderer;
 var shapes;
 var chosenSkeleton = "z23_h";
 var activeSkeleton;
-var swirlEffect = new spine.SwirlEffect(0);
-var jitterEffect = new spine.JitterEffect(20, 20);
-var swirlTime = 0;
+
 function checkMobile() {
 	if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		return true;
@@ -27,10 +24,57 @@ function checkMobile() {
 		return false;
 	}
 }
-function loadJson() {
+function setupUI () {
 	//load name list.
 	$.getJSON(url, function(data){
 		json = eval(data);
+		
+		//set options
+		var skeletonList = $("#skeletonList");
+		for (var i in json) {
+			var skeletonName = json[i];
+			var option = $("<option></option>");
+			option.attr("value", skeletonName).text(skeletonName);
+			if (skeletonName === chosenSkeleton) option.attr("selected", "selected");
+			skeletonList.append(option);
+		}
+		skeletonList.change(function() {
+			choose($("#skeletonList option:selected").text());
+		})
+	})
+
+	//Selectable searchbox
+	$(function(){
+		$("#skeletonBox").attr("value", chosenSkeleton);
+		$(document).bind("click", function(e) {
+			var e = e || window.event;
+	        var elem = e.target || e.srcElement;
+	        while (elem) {
+	            if (elem.id && (elem.id == "skeletonList" || elem.id == "skeletonBox")) {
+	            	return;
+	            }
+                elem = elem.parentNode;
+			}
+			$("#skeletonList").css("display", "none");
+		});
+	})
+	$("#skeletonList").bind("change", function(){
+		$(this).prev("input").val($(this).find("option:selected").text());
+		$("#skeletonList").css("display", "none");
+	})
+	$("#skeletonBox").bind("focus", function(){
+		$("#skeletonList").css("display", "");
+	})
+	$("#skeletonBox").bind("input", function(){
+		var skeletonList = $("#skeletonList");
+		skeletonList.html("");
+		for(i in json){
+			var skeletonName = json[i];
+			if(skeletonName.substring(0, this.value.length).indexOf(this.value) == 0){
+				var option = $("<option></option>").text(skeletonName);
+				skeletonList.append(option);
+			}
+		}
 	})
 }
 function init () {
@@ -63,7 +107,7 @@ function init () {
 	assetManager = new spine.webgl.AssetManager(gl);
 	// Tell AssetManager to load the resources for each model, including the exported .skel file, the .atlas file and the .png
 	// file for the atlas. We then wait until all resources are loaded in the load() method.
-	loadJson();
+	setupUI();
 	assetManager.loadBinary("assets/AL/" + chosenSkeleton + "/" + chosenSkeleton + ".skel");
 	assetManager.loadTextureAtlas("assets/AL/" + chosenSkeleton + "/" + chosenSkeleton + ".atlas");
 
@@ -71,14 +115,14 @@ function init () {
 	requestAnimationFrame(load);
 }
 function choose(name){
+	if(name === chosenSkeleton) return;
 	change = true;
 	assetManager.loadBinary("assets/AL/" + name + "/" + name + ".skel");
 	assetManager.loadTextureAtlas("assets/AL/" + name + "/" + name + ".atlas");
 	chosenSkeleton = name;
 }
 function load() {
-	loading.style.display = "block";
-	// console.log("load:" + assetManager.isLoadingComplete());
+	loading.style.display = "";
 	// Wait until the AssetManager has loaded all resources, then load the skeletons.
 	if (assetManager.isLoadingComplete()) {
 		// for(i in json){
@@ -86,11 +130,7 @@ function load() {
 		// }
 		activeSkeleton = loadSkeleton(chosenSkeleton, "normal", false);
 		change = false;
-		if(!loaded){
-			setupUI();
-		}
 		setupAnimationUI();
-		loaded = true;
 		requestAnimationFrame(render);
 	} else {
 		requestAnimationFrame(load);
@@ -147,24 +187,8 @@ function setupAnimationUI(){
 		state.setAnimation(0, animationName, true);
 	})
 }
-function setupUI () {
-	var skeletonList = $("#skeletonList");
-	for (var i in json) {
-		skeletonName = json[i];
-		var option = $("<option></option>");
-		option.attr("value", skeletonName).text(skeletonName);
-		if (skeletonName === chosenSkeleton) option.attr("selected", "selected");
-		skeletonList.append(option);
-	}
-	skeletonList.change(function() {
-		choose($("#skeletonList option:selected").text());
-		// setupAnimationUI();
-	})
-	// setupAnimationUI();
-}
 function render () {
 	loading.style.display = "none";
-	// console.log("render:" + assetManager.isLoadingComplete());
 	if(change){
 		load();
 		return;
