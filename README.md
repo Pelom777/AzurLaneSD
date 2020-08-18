@@ -11,3 +11,5 @@ gitee：[http://pelom.gitee.io/azurlanesd/](http://pelom.gitee.io/azurlanesd/)�
 - 现已使用.skel读取模型，若有bug请提交
 
 - 添加搜索框，可用拼音搜索角色名
+
+- 添加分享功能，点击左上角即可将当前的角色及动作以链接形式发送给对方

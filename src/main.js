@@ -17,8 +17,37 @@ var skeletonRenderer;
 var debugRenderer;
 var shapes;
 var chosenSkeleton = "z23_h";
+var chosenAnimation = "normal";
 var activeSkeleton;
+var msg;
 
+function getUrlParam(){
+	var url = window.location.href;
+	url = url.split("?")[1];
+	if(url === undefined){
+		return;
+	}
+	var paramList = url.split("&");
+	if(paramList.length > 2 || paramList.length < 1){
+		return;
+	}
+	for(i in nameList){
+		var skeletonName = nameList[i];
+		if(paramList[0] === nameList[i]){
+			chosenSkeleton = paramList[0];
+			if(paramList[1] != undefined){
+				chosenAnimation = paramList[1];
+			}
+			break;
+		}
+	}
+}
+function setUrlParam(){
+	var url = window.location.href;
+	url = url.split("?")[0];
+	url += "?" + $("#skeletonList option:selected").text() + "&" + $("#animationList option:selected").text();
+	return url;
+}
 function checkMobile() {
 	if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		return true;
@@ -27,22 +56,16 @@ function checkMobile() {
 	}
 }
 function setupUI () {
-	//load name list.
-	$.getJSON(nameUrl, function(data){
-		nameList = eval(data);
-		
-		//set options
-		var skeletonList = $("#skeletonList");
-		for (var i in nameList) {
-			var skeletonName = nameList[i];
-			var option = $("<option></option>");
-			option.attr("value", skeletonName).text(skeletonName);
-			if (skeletonName === chosenSkeleton) option.attr("selected", "selected");
-			skeletonList.append(option);
-		}
-		skeletonList.change(function() {
-			choose($("#skeletonList option:selected").text());
-		})
+	//set options
+	var skeletonList = $("#skeletonList");
+	for (var i in nameList) {
+		var skeletonName = nameList[i];
+		var option = $("<option></option>").attr("value", skeletonName).text(skeletonName);
+		if (skeletonName === chosenSkeleton) option.attr("selected", "selected");
+		skeletonList.append(option);
+	}
+	skeletonList.change(function() {
+		choose($("#skeletonList option:selected").text());
 	})
 	$.getJSON(byJsonUrl, function(data){
 		byJsonList = eval(data);
@@ -76,14 +99,43 @@ function setupUI () {
 		for(i in nameList){
 			var skeletonName = nameList[i];
 			if(skeletonName.substring(0, this.value.length).indexOf(this.value) == 0){
-				var option = $("<option></option>").text(skeletonName);
+				var option = $("<option></option>").attr("value", skeletonName).text(skeletonName);
+				if (skeletonName === chosenSkeleton) option.attr("selected", "selected");
 				skeletonList.append(option);
 			}
 		}
 	})
+
+	//set share method
+	$("#share").bind("click", function(){
+		var url = setUrlParam();
+		var input = $("<input>").attr("value", url).attr("readonly", "readonly");
+		$("body").append(input);
+		input.select();
+		document.execCommand("copy");
+		input.remove();
+	})
+	$("#share").bind("mouseenter", function(){
+		showMessage("点击左上分享按钮，即可将当前角色及动作分享给他人", 4000);
+	})
+	$("#share").bind("click", function(){
+		showMessage("链接已复制至剪贴板", 1000);
+	})
 }
-function init () {
+function showMessage(text, delay){
+	if(msg === undefined){
+		msg = $("<div></div>").attr("class", "message");
+	}
+	if(msg.css("display") != "none"){
+		msg.finish();
+	}
+	msg.html(text);
+	$("body").append(msg);
+	msg.fadeIn(500).delay(delay).fadeOut(500);
+}
+function init(){
 	isMobile = checkMobile();
+	showMessage("点击左上分享按钮，即可将当前角色及动作分享给他人", 4000);
 	// Setup canvas and WebGL context. We pass alpha: false to canvas.getContext() so we don't use premultiplied alpha when
 	// loading textures. That is handled separately by PolygonBatcher.
 	canvas = document.getElementById("canvas");
@@ -110,39 +162,47 @@ function init () {
 	debugShader = spine.webgl.Shader.newColored(gl);
 	shapes = new spine.webgl.ShapeRenderer(gl);
 	assetManager = new spine.webgl.AssetManager(gl);
-	// Tell AssetManager to load the resources for each model, including the exported .skel file, the .atlas file and the .png
-	// file for the atlas. We then wait until all resources are loaded in the load() method.
-	setupUI();
-	assetManager.loadBinary("assets/AL/" + chosenSkeleton + "/" + chosenSkeleton + ".skel");
-	assetManager.loadTextureAtlas("assets/AL/" + chosenSkeleton + "/" + chosenSkeleton + ".atlas");
+	//load name list.
+	$.getJSON(nameUrl, function(data){
+		nameList = eval(data);
 
-	// setupUI();
-	requestAnimationFrame(load);
+		getUrlParam();
+		setupUI();
+		loadAsset(chosenSkeleton);
+		
+		requestAnimationFrame(load);
+	})
 }
-function choose(name){
-	if(name === chosenSkeleton) return;
-	for(i in byJsonList){
-		if(name === byJsonList[i]){
-			byJson = true;
-			break;
-		}
-	}
-	change = true;
+function loadAsset(name){
 	if(byJson){
 		assetManager.loadText("assets/AL/" + name + "/" + name + ".json");
 	} else {
 		assetManager.loadBinary("assets/AL/" + name + "/" + name + ".skel");
 	}
 	assetManager.loadTextureAtlas("assets/AL/" + name + "/" + name + ".atlas");
+}
+function choose(name){
+	if(name === chosenSkeleton){
+		return;
+	} 
+	for(i in byJsonList){
+		if(name === byJsonList[i]){
+			byJson = true;
+			break;
+		}
+	}
+	loadAsset(name);
+	change = true;
 	chosenSkeleton = name;
 }
 function load() {
 	loading.style.display = "";
 	// Wait until the AssetManager has loaded all resources, then load the skeletons.
 	if (assetManager.isLoadingComplete()) {
-		activeSkeleton = loadSkeleton(chosenSkeleton, "normal", false);
+		activeSkeleton = loadSkeleton(chosenSkeleton, chosenAnimation, false);
 		change = false;
 		byJson = false;
+		chosenAnimation = "normal";
 		setupAnimationUI();
 		requestAnimationFrame(render);
 	} else {
@@ -173,13 +233,10 @@ function loadSkeleton (name, initialAnimation, premultipliedAlpha, skin) {
 	// Create an AnimationState, and set the initial animation in looping mode.
 	animationStateData = new spine.AnimationStateData(skeleton.data);
 	var animationState = new spine.AnimationState(animationStateData);
-	try{
-		animationState.setAnimation(0, initialAnimation, true);
-	} catch(err) {
-		console.log(err);
+	if(skeleton.data.findAnimation(initialAnimation) == null){
 		initialAnimation = skeleton.data.animations[0].name;
-		animationState.setAnimation(0, initialAnimation, true);
 	}
+	animationState.setAnimation(0, initialAnimation, true);
 	// Pack everything up and return to caller.
 	return { skeleton: skeleton, state: animationState, bounds: bounds, premultipliedAlpha: premultipliedAlpha };
 }
