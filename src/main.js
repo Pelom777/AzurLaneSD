@@ -16,7 +16,7 @@ var assetManager;
 var skeletonRenderer;
 var debugRenderer;
 var shapes;
-var chosenSkeleton = "z23_h";
+var chosenSkeleton = "sairenboss5";
 var chosenAnimation = "normal";
 var activeSkeleton;
 var msg;
