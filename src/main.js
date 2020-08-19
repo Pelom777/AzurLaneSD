@@ -125,12 +125,12 @@ function setupUI () {
 function showMessage(text, delay){
 	if(msg === undefined){
 		msg = $("<div></div>").attr("class", "message");
+		$("body").append(msg);
 	}
 	if(msg.css("display") != "none"){
 		msg.finish();
 	}
 	msg.html(text);
-	$("body").append(msg);
 	msg.fadeIn(500).delay(delay).fadeOut(500);
 }
 function init(){
@@ -280,7 +280,7 @@ function render () {
 	lastFrameTime = now;
 	// Update the MVP matrix to adjust for canvas size changes
 	resize();
-	gl.clearColor(0.3, 0.3, 0.3, 1);
+	gl.clearColor(0.5, 0.5, 0.5, 1);
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	// Apply the animation state based on the delta time.
 	var state = activeSkeleton.state;
