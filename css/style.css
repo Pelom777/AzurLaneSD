@@ -14,9 +14,11 @@ canvas { position: absolute; width: 100% ;height: 100%; }
     width: 10.7rem;
     margin-left: -10.7rem;
     margin-top: 1.6rem;
-    padding-left: 0.5rem;
     outline: none;
     border: 0.1rem solid #999;
+}
+.selectable_searchbox option{
+    padding-left: 0.5rem;
 }
 .selectable_searchbox input{
     width: 10rem;
