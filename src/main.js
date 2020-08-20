@@ -16,9 +16,10 @@ var assetManager;
 var skeletonRenderer;
 var debugRenderer;
 var shapes;
-var chosenSkeleton = "sairenboss5";
+var chosenSkeleton = "chaijun_2";
 var chosenAnimation = "normal";
 var activeSkeleton;
+var root;
 var msg;
 
 function getUrlParam(){
@@ -228,6 +229,7 @@ function loadSkeleton (name, initialAnimation, premultipliedAlpha, skin) {
 		skeletonData = skeletonBinary.readSkeletonData(assetManager.get("assets/AL/" + name + "/" + name + ".skel"));
 	}
 	var skeleton = new spine.Skeleton(skeletonData);
+	root = skeletonData.findBone("root");
 	skeleton.setSkinByName(skin);
 	var bounds = calculateBounds(skeleton);
 	// Create an AnimationState, and set the initial animation in looping mode.
