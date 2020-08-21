@@ -122,6 +122,14 @@ function setupUI () {
 	$("#share").bind("click", function(){
 		showMessage("链接已复制至剪贴板", 1000);
 	})
+
+	//set scale method
+	$("#scaler").bind("input", function(){
+		scale(this.value);
+	})
+}
+function scale(scale){
+	root.scaleX = root.scaleY = scale;
 }
 function showMessage(text, delay){
 	if(msg === undefined){
