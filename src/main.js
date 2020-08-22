@@ -1,4 +1,4 @@
-function main(nameUrl, byJsonUrl, chosenSkeleton, chosenAnimation){
+function main(pre, nameUrl, byJsonUrl, chosenSkeleton, chosenAnimation){
 	var isMobile;
 	var lastFrameTime = Date.now() / 1000;
 	var nameList;
@@ -183,11 +183,11 @@ function main(nameUrl, byJsonUrl, chosenSkeleton, chosenAnimation){
 	}
 	function loadAsset(name){
 		if(byJson){
-			assetManager.loadText("assets/spine/" + name + "/" + name + ".json");
+			assetManager.loadText(pre + name + "/" + name + ".json");
 		} else {
-			assetManager.loadBinary("assets/spine/" + name + "/" + name + ".skel");
+			assetManager.loadBinary(pre + name + "/" + name + ".skel");
 		}
-		assetManager.loadTextureAtlas("assets/spine/" + name + "/" + name + ".atlas");
+		assetManager.loadTextureAtlas(pre + name + "/" + name + ".atlas");
 	}
 	function choose(name){
 		if(name === chosenSkeleton){
@@ -220,7 +220,7 @@ function main(nameUrl, byJsonUrl, chosenSkeleton, chosenAnimation){
 	function loadSkeleton (name, initialAnimation, premultipliedAlpha, skin) {
 		if (skin === undefined) skin = "default";
 		// Load the texture atlas using name.atlas from the AssetManager.
-		var atlas = assetManager.get("assets/spine/" + name + "/" + name + ".atlas");
+		var atlas = assetManager.get(pre + name + "/" + name + ".atlas");
 		// Create a AtlasAttachmentLoader that resolves region, mesh, boundingbox and path attachments
 		var atlasLoader = new spine.AtlasAttachmentLoader(atlas);
 		// Create a SkeletonBinary instance for parsing the .skel file.
@@ -231,9 +231,9 @@ function main(nameUrl, byJsonUrl, chosenSkeleton, chosenAnimation){
 		var skeletonData;
 		if(byJson){
 			var skeletonJson = new spine.SkeletonJson(atlasLoader);
-			skeletonData = skeletonJson.readSkeletonData(assetManager.get("assets/spine/" + name + "/" + name + ".json"));
+			skeletonData = skeletonJson.readSkeletonData(assetManager.get(pre + name + "/" + name + ".json"));
 		} else {
-			skeletonData = skeletonBinary.readSkeletonData(assetManager.get("assets/spine/" + name + "/" + name + ".skel"));
+			skeletonData = skeletonBinary.readSkeletonData(assetManager.get(pre + name + "/" + name + ".skel"));
 		}
 		var skeleton = new spine.Skeleton(skeletonData);
 		root = skeletonData.findBone("root");
