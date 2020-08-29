@@ -277,6 +277,8 @@ function main(pre, nameUrl, byJsonUrl, chosenSkeleton, chosenAnimation){
 			skeleton.setToSetupPose();
 			state.setAnimation(0, animationName, true);
 		})
+		//reset scaler
+		$("#scaler").val("1.0");
 	}
 	function render () {
 		loading.style.display = "none";
