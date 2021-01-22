@@ -1,272 +1,272 @@
 
 bola.png
-size: 1024,256
+size: 2048,256
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 body
   rotate: true
-  xy: 603, 55
-  size: 63, 68
-  orig: 63, 68
+  xy: 464, 65
+  size: 79, 85
+  orig: 79, 85
   offset: 0, 0
   index: -1
 body_w
-  rotate: true
-  xy: 305, 89
-  size: 45, 48
-  orig: 45, 48
+  rotate: false
+  xy: 219, 45
+  size: 56, 60
+  orig: 56, 60
   offset: 0, 0
   index: -1
 dao
   rotate: false
-  xy: 849, 177
-  size: 108, 77
-  orig: 108, 77
+  xy: 1058, 158
+  size: 135, 96
+  orig: 135, 96
   offset: 0, 0
   index: -1
 eye_1_1
   rotate: false
-  xy: 355, 104
-  size: 48, 30
-  orig: 48, 30
+  xy: 277, 68
+  size: 60, 37
+  orig: 60, 37
   offset: 0, 0
   index: -1
 eye_1_2
-  rotate: false
-  xy: 797, 87
-  size: 38, 29
-  orig: 38, 29
+  rotate: true
+  xy: 1834, 167
+  size: 48, 36
+  orig: 48, 36
   offset: 0, 0
   index: -1
 eye_2_1
-  rotate: false
-  xy: 355, 85
-  size: 37, 17
-  orig: 37, 17
+  rotate: true
+  xy: 339, 59
+  size: 46, 21
+  orig: 46, 21
   offset: 0, 0
   index: -1
 eye_2_2
   rotate: false
-  xy: 119, 9
-  size: 26, 17
-  orig: 26, 17
+  xy: 178, 2
+  size: 33, 21
+  orig: 33, 21
   offset: 0, 0
   index: -1
 eye_3_1
   rotate: true
-  xy: 876, 89
-  size: 26, 38
-  orig: 26, 38
+  xy: 1124, 124
+  size: 32, 47
+  orig: 32, 47
   offset: 0, 0
   index: -1
 eye_3_2
-  rotate: false
-  xy: 119, 28
-  size: 26, 38
-  orig: 26, 38
+  rotate: true
+  xy: 1872, 180
+  size: 32, 47
+  orig: 32, 47
   offset: 0, 0
   index: -1
 face
   rotate: true
-  xy: 526, 120
-  size: 134, 141
-  orig: 134, 141
+  xy: 655, 87
+  size: 167, 176
+  orig: 167, 176
   offset: 0, 0
   index: -1
 hair_F
   rotate: false
-  xy: 2, 135
-  size: 163, 119
-  orig: 163, 119
+  xy: 2, 105
+  size: 204, 149
+  orig: 204, 149
   offset: 0, 0
   index: -1
 hair_L
   rotate: true
-  xy: 291, 136
-  size: 30, 121
-  orig: 30, 121
+  xy: 1725, 217
+  size: 37, 151
+  orig: 37, 151
   offset: 0, 0
   index: -1
 hair_L2
   rotate: false
-  xy: 669, 121
-  size: 62, 133
-  orig: 62, 133
+  xy: 833, 88
+  size: 78, 166
+  orig: 78, 166
   offset: 0, 0
   index: -1
 hair_R
   rotate: true
-  xy: 167, 136
-  size: 30, 122
-  orig: 30, 122
+  xy: 208, 107
+  size: 37, 152
+  orig: 37, 152
   offset: 0, 0
   index: -1
 hair_R2
   rotate: true
-  xy: 2, 68
-  size: 65, 139
-  orig: 65, 139
+  xy: 2, 22
+  size: 81, 174
+  orig: 81, 174
   offset: 0, 0
   index: -1
 hand_L1
-  rotate: true
-  xy: 940, 79
-  size: 27, 33
-  orig: 27, 33
+  rotate: false
+  xy: 219, 2
+  size: 34, 41
+  orig: 34, 41
   offset: 0, 0
   index: -1
 hand_L2
-  rotate: true
-  xy: 837, 87
-  size: 28, 37
-  orig: 28, 37
+  rotate: false
+  xy: 1087, 110
+  size: 35, 46
+  orig: 35, 46
   offset: 0, 0
   index: -1
 hand_R1
-  rotate: false
-  xy: 147, 33
-  size: 26, 36
-  orig: 26, 36
+  rotate: true
+  xy: 1921, 180
+  size: 32, 45
+  orig: 32, 45
   offset: 0, 0
   index: -1
 hand_R2
-  rotate: true
-  xy: 975, 79
-  size: 27, 33
-  orig: 27, 33
+  rotate: false
+  xy: 255, 2
+  size: 34, 41
+  orig: 34, 41
   offset: 0, 0
   index: -1
 hat
   rotate: false
-  xy: 167, 168
-  size: 185, 86
-  orig: 185, 86
+  xy: 208, 146
+  size: 231, 108
+  orig: 231, 108
   offset: 0, 0
   index: -1
 jianzhuang1
-  rotate: true
-  xy: 673, 82
-  size: 37, 58
-  orig: 37, 58
+  rotate: false
+  xy: 551, 72
+  size: 46, 72
+  orig: 46, 72
   offset: 0, 0
   index: -1
 jianzhuang2
   rotate: true
-  xy: 414, 96
-  size: 70, 99
-  orig: 70, 99
+  xy: 1599, 167
+  size: 87, 124
+  orig: 87, 124
   offset: 0, 0
   index: -1
 leg_L1
-  rotate: true
-  xy: 673, 55
-  size: 25, 44
-  orig: 25, 44
+  rotate: false
+  xy: 1054, 101
+  size: 31, 55
+  orig: 31, 55
   offset: 0, 0
   index: -1
 leg_L2
-  rotate: false
-  xy: 916, 85
-  size: 22, 30
-  orig: 22, 30
+  rotate: true
+  xy: 1968, 184
+  size: 28, 37
+  orig: 28, 37
   offset: 0, 0
   index: -1
 leg_R1
-  rotate: true
-  xy: 177, 74
-  size: 26, 46
-  orig: 26, 46
+  rotate: false
+  xy: 1020, 99
+  size: 32, 58
+  orig: 32, 58
   offset: 0, 0
   index: -1
 leg_R2
-  rotate: false
-  xy: 147, 2
-  size: 22, 29
-  orig: 22, 29
+  rotate: true
+  xy: 1195, 150
+  size: 27, 36
+  orig: 27, 36
   offset: 0, 0
   index: -1
 meimao_1
   rotate: false
-  xy: 733, 118
-  size: 102, 58
-  orig: 102, 58
+  xy: 1341, 181
+  size: 127, 73
+  orig: 127, 73
   offset: 0, 0
   index: -1
 meimao_2
   rotate: false
-  xy: 733, 178
-  size: 114, 76
-  orig: 114, 76
+  xy: 913, 159
+  size: 143, 95
+  orig: 143, 95
   offset: 0, 0
   index: -1
 meimao_3
   rotate: false
-  xy: 941, 108
-  size: 80, 60
-  orig: 80, 60
+  xy: 362, 69
+  size: 100, 75
+  orig: 100, 75
   offset: 0, 0
   index: -1
 meimao_4
   rotate: false
-  xy: 837, 117
-  size: 102, 58
-  orig: 102, 58
+  xy: 1470, 182
+  size: 127, 72
+  orig: 127, 72
   offset: 0, 0
   index: -1
 meimao_5
   rotate: false
-  xy: 2, 6
-  size: 115, 60
-  orig: 115, 60
+  xy: 1195, 179
+  size: 144, 75
+  orig: 144, 75
   offset: 0, 0
   index: -1
 paopao1
   rotate: false
-  xy: 354, 168
-  size: 170, 86
-  orig: 170, 86
+  xy: 441, 146
+  size: 212, 108
+  orig: 212, 108
   offset: 0, 0
   index: -1
 pifeng
-  rotate: false
-  xy: 959, 170
-  size: 63, 84
-  orig: 63, 84
+  rotate: true
+  xy: 913, 78
+  size: 79, 105
+  orig: 79, 105
   offset: 0, 0
   index: -1
 sleep6
   rotate: false
-  xy: 515, 78
-  size: 86, 40
-  orig: 86, 40
+  xy: 1725, 165
+  size: 107, 50
+  orig: 107, 50
   offset: 0, 0
   index: -1
 weapon1
   rotate: false
-  xy: 733, 84
-  size: 62, 32
-  orig: 62, 32
+  xy: 1958, 214
+  size: 77, 40
+  orig: 77, 40
   offset: 0, 0
   index: -1
 weapon2
-  rotate: true
-  xy: 143, 71
-  size: 62, 32
-  orig: 62, 32
+  rotate: false
+  xy: 1878, 214
+  size: 78, 40
+  orig: 78, 40
   offset: 0, 0
   index: -1
 weapon3
-  rotate: false
-  xy: 177, 102
-  size: 62, 32
-  orig: 62, 32
+  rotate: true
+  xy: 599, 67
+  size: 77, 40
+  orig: 77, 40
   offset: 0, 0
   index: -1
 weapon4
-  rotate: false
-  xy: 241, 103
-  size: 62, 31
-  orig: 62, 31
+  rotate: true
+  xy: 178, 25
+  size: 78, 39
+  orig: 78, 39
   offset: 0, 0
   index: -1
