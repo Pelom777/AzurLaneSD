@@ -1,10 +1,10 @@
-function main(
-	chosenSkeleton = "salatuojia",
-	chosenAnimation = "normal",
-	dir = "assets/spine/",
-	nameUrl = "assets/name.json",
-	byJsonUrl = "assets/byJson.json"
-){
+var load = function (
+	chosenSkeleton = 'salatuojia',
+	chosenAnimation = 'normal',
+	dir = 'assets/spine/',
+	nameUrl = 'assets/name.json',
+	byJsonUrl = 'assets/byJson.json'
+) {
 	var isMobile;
 	var lastFrameTime = Date.now() / 1000;
 	var nameList;
@@ -12,7 +12,6 @@ function main(
 	var change = false;
 	var byJson = false;
 	var canvas;
-	var loading;
 	var shader;
 	var batcher;
 	var gl;
@@ -22,142 +21,166 @@ function main(
 	var debugRenderer;
 	var shapes;
 	var activeSkeleton;
-	var root;
+	var scaling = 1.0;
+	var offsetX = 0, offsetY = 0;
 	var msg;
 
-	function getUrlParam(){
+	var getUrlParam = function () {
 		var url = window.location.href;
-		url = url.split("?")[1];
-		if(url === undefined){
+		url = url.split('?')[1];
+		if (url === undefined) {
 			return;
 		}
-		var paramList = url.split("&");
-		if(paramList.length > 2 || paramList.length < 1){
+		var paramList = url.split('&');
+		if (paramList.length > 2 || paramList.length < 1) {
 			return;
 		}
-		for(i in nameList){
+		for (var i in nameList) {
 			var skeletonName = nameList[i];
-			if(paramList[0] === nameList[i]){
+			if (paramList[0] === nameList[i]) {
 				chosenSkeleton = paramList[0];
-				if(paramList[1] != undefined){
+				if (paramList[1] != undefined) {
 					chosenAnimation = paramList[1];
 				}
 				break;
 			}
 		}
 	}
-	function setUrlParam(){
+	var setUrlParam = function () {
 		var url = window.location.href;
-		url = url.split("?")[0];
-		url += "?" + $("#skeletonList option:selected").text() + "&" + $("#animationList option:selected").text();
+		url = url.split('?')[0];
+		url += '?' + $('#skeletonList option:selected').text() + '&' + $('#animationList option:selected').text();
 		return url;
 	}
-	function checkMobile() {
-		if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+	var checkMobile = function () {
+		if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	function setupUI () {
-		//set options
-		var skeletonList = $("#skeletonList");
+	var setupUI = function () {
+		// set options
+		var skeletonList = $('#skeletonList');
 		for (var i in nameList) {
 			var skeletonName = nameList[i];
-			var option = $("<option></option>").attr("value", skeletonName).text(skeletonName);
-			if (skeletonName === chosenSkeleton) option.attr("selected", "selected");
+			var option = $('<option></option>').attr('value', skeletonName).text(skeletonName);
+			if (skeletonName === chosenSkeleton) option.attr('selected', 'selected');
 			skeletonList.append(option);
 		}
-		skeletonList.change(function() {
-			choose($("#skeletonList option:selected").text());
+		skeletonList.change(function () {
+			choose($('#skeletonList option:selected').text());
 		})
-		if(byJsonUrl != ""){
-			$.getJSON(byJsonUrl, function(data){
+		if (byJsonUrl != '') {
+			$.getJSON(byJsonUrl, function (data) {
 				byJsonList = eval(data);
 			})
 		}
 
-		//Selectable searchbox
-		$(function(){
-			$("#skeletonBox").attr("value", chosenSkeleton);
-			$(document).bind("click", function(e) {
-				var e = e || window.event;
-		        var elem = e.target || e.srcElement;
-		        while (elem) {
-		            if (elem.id && (elem.id == "skeletonList" || elem.id == "skeletonBox")) {
-		            	return;
-		            }
-	                elem = elem.parentNode;
+		// set Selectable searchbox
+		$(function () {
+			$('#skeletonBox').attr('value', chosenSkeleton);
+			$(document).on('click', function (e) {
+				e = e || window.event;
+				var elem = e.target || e.srcElement;
+				while (elem) {
+					if (elem.id && (elem.id == 'skeletonList' || elem.id == 'skeletonBox')) {
+						return;
+					}
+					elem = elem.parentNode;
 				}
-				$("#skeletonList").css("display", "none");
+				$('#skeletonList').css('display', 'none');
 			});
 		})
-		$("#skeletonList").bind("change", function(){
-			$(this).prev("input").val($(this).find("option:selected").text());
-			$("#skeletonList").css("display", "none");
+		$('#skeletonList').on('change', function () {
+			$(this).prev('input').val($(this).find('option:selected').text());
+			$('#skeletonList').css('display', 'none');
 		})
-		$("#skeletonBox").bind("focus", function(){
-			$("#skeletonList").css("display", "");
+		$('#skeletonBox').on('focus', function () {
+			$('#skeletonList').css('display', '');
 		})
-		$("#skeletonBox").bind("input", function(){
-			var skeletonList = $("#skeletonList");
-			skeletonList.html("");
-			for(i in nameList){
+		$('#skeletonBox').on('input', function () {
+			var skeletonList = $('#skeletonList');
+			skeletonList.html('');
+			for (i in nameList) {
 				var skeletonName = nameList[i];
-				if(skeletonName.substring(0, this.value.length).indexOf(this.value) == 0){
-					var option = $("<option></option>").attr("value", skeletonName).text(skeletonName);
-					if (skeletonName === chosenSkeleton) option.attr("selected", "selected");
+				if (skeletonName.substring(0, this.value.length).indexOf(this.value) == 0) {
+					var option = $('<option></option>').attr('value', skeletonName).text(skeletonName);
+					if (skeletonName === chosenSkeleton) option.attr('selected', 'selected');
 					skeletonList.append(option);
 				}
 			}
 		})
 
-		//set share method
-		$("#share").bind("click", function(){
+		// set share method
+		$('#share').on('click', function () {
 			var url = setUrlParam();
-			var input = $("<input>").attr("value", url).attr("readonly", "readonly");
-			$("body").append(input);
+			var input = $('<input>').attr('value', url).attr('readonly', 'readonly');
+			$('body').append(input);
 			input.select();
-			document.execCommand("copy");
+			document.execCommand('copy');
 			input.remove();
 		})
-		$("#share").bind("mouseenter", function(){
-			showMessage("点击左上分享按钮，即可将当前角色及动作分享给他人", 4000);
+		$('#share').on('mouseenter', function () {
+			showMessage('点击左上分享按钮，即可将当前角色及动作分享给他人', 4000);
 		})
-		$("#share").bind("click", function(){
-			showMessage("链接已复制至剪贴板", 1000);
+		$('#share').on('click', function () {
+			showMessage('链接已复制至剪贴板', 1000);
 		})
 
-		//set scale method
-		$("#scaler").bind("input", function(){
-			scale(this.value);
+		// set scale method
+		$('#scaler').on('input', function () {
+			scaling = 1.0 / this.value;
+		})
+
+		// set translate method
+		$('#canvas').on('mousedown', function (e) {
+			var startX = e.clientX, startY = e.clientY;
+			$('#canvas').on('mousemove', function (e) {
+				offsetX += e.clientX - startX, offsetY += e.clientY - startY;
+				startX = e.clientX, startY = e.clientY;
+			}).on('mouseup', function () {
+				$('#canvas').off('mousemove');
+			})
+		})
+		
+		// set reset method
+		$('#reset').on('click', function(){
+			resetTransform();
 		})
 	}
-	function scale(scale){
-		root.scaleX = root.scaleY = scale;
-	}
-	function showMessage(text, delay){
-		if(msg === undefined){
-			msg = $("<div></div>").attr("class", "message");
-			$("body").append(msg);
+	var resetTransform = function(){
+		// reset scaler
+		scaling = 1.0;
+		$('#scaler').val('1.0');
+		if (chosenSkeleton.indexOf('_painting') != -1){
+			scaling = 2;
+			$('#scaler').val('0.5');
 		}
-		if(msg.css("display") != "none"){
+		// reset translation
+		offsetX = offsetY = 0;
+	}
+	var showMessage = function (text, delay) {
+		if (msg === undefined) {
+			msg = $('<div></div>').attr('class', 'message');
+			$('body').append(msg);
+		}
+		if (msg.css('display') != 'none') {
 			msg.finish();
 		}
 		msg.html(text);
 		msg.fadeIn(500).delay(delay).fadeOut(500);
 	}
-	function init(){
+	var init = function () {
 		isMobile = checkMobile();
-		showMessage("点击左上分享按钮，即可将当前角色及动作分享给他人", 4000);
+		showMessage('拖动鼠标以移动，点击左下角以重置', 4000);
 		// Setup canvas and WebGL context. We pass alpha: false to canvas.getContext() so we don't use premultiplied alpha when
 		// loading textures. That is handled separately by PolygonBatcher.
-		canvas = document.getElementById("canvas");
-		loading = document.getElementById("loading");
+		canvas = document.getElementById('canvas');
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
 		var config = { alpha: false };
-		gl = canvas.getContext("webgl", config) || canvas.getContext("experimental-webgl", config);
+		gl = canvas.getContext('webgl', config) || canvas.getContext('experimental-webgl', config);
 		if (!gl) {
 			alert('WebGL is unavailable.');
 			return;
@@ -177,30 +200,31 @@ function main(
 		shapes = new spine.webgl.ShapeRenderer(gl);
 		assetManager = new spine.webgl.AssetManager(gl);
 		//load name list.
-		$.getJSON(nameUrl, function(data){
+		$.getJSON(nameUrl, function (data) {
 			nameList = eval(data);
 
 			getUrlParam();
 			setupUI();
+
 			loadAsset(chosenSkeleton);
 
 			requestAnimationFrame(load);
 		})
 	}
-	function loadAsset(name){
-		if(byJson){
-			assetManager.loadText(dir + name + "/" + name + ".json");
+	var loadAsset = function (name) {
+		if (byJson) {
+			assetManager.loadText(dir + name + '/' + name + '.json');
 		} else {
-			assetManager.loadBinary(dir + name + "/" + name + ".skel");
+			assetManager.loadBinary(dir + name + '/' + name + '.skel');
 		}
-		assetManager.loadTextureAtlas(dir + name + "/" + name + ".atlas");
+		assetManager.loadTextureAtlas(dir + name + '/' + name + '.atlas');
 	}
-	function choose(name){
-		if(name === chosenSkeleton){
+	var choose = function (name) {
+		if (name === chosenSkeleton) {
 			return;
-		} 
-		for(i in byJsonList){
-			if(name === byJsonList[i]){
+		}
+		for (i in byJsonList) {
+			if (name === byJsonList[i]) {
 				byJson = true;
 				break;
 			}
@@ -209,24 +233,29 @@ function main(
 		change = true;
 		chosenSkeleton = name;
 	}
-	function load() {
-		loading.style.display = "";
+	var load = function () {
+		$("#loading").css('display', '');
 		// Wait until the AssetManager has loaded all resources, then load the skeletons.
 		if (assetManager.isLoadingComplete()) {
-			activeSkeleton = loadSkeleton(chosenSkeleton, chosenAnimation, false);
+			if (chosenSkeleton.indexOf('_painting') != -1) {
+				activeSkeleton = loadSkeleton(chosenSkeleton, chosenAnimation, true);
+			}
+			else {
+				activeSkeleton = loadSkeleton(chosenSkeleton, chosenAnimation, false);
+			}
 			change = false;
 			byJson = false;
-			chosenAnimation = "normal";
+			chosenAnimation = 'normal';
 			setupAnimationUI();
 			requestAnimationFrame(render);
 		} else {
 			requestAnimationFrame(load);
 		}
 	}
-	function loadSkeleton (name, initialAnimation, premultipliedAlpha, skin) {
-		if (skin === undefined) skin = "default";
+	var loadSkeleton = function (name, initialAnimation, premultipliedAlpha, skin) {
+		if (skin === undefined) skin = 'default';
 		// Load the texture atlas using name.atlas from the AssetManager.
-		var atlas = assetManager.get(dir + name + "/" + name + ".atlas");
+		var atlas = assetManager.get(dir + name + '/' + name + '.atlas');
 		// Create a AtlasAttachmentLoader that resolves region, mesh, boundingbox and path attachments
 		var atlasLoader = new spine.AtlasAttachmentLoader(atlas);
 		// Create a SkeletonBinary instance for parsing the .skel file.
@@ -235,27 +264,26 @@ function main(
 		// Set the scale to apply during parsing, parse the file, and create a new skeleton.
 		skeletonBinary.scale = isMobile ? 0.75 : 1;
 		var skeletonData;
-		if(byJson){
+		if (byJson) {
 			var skeletonJson = new spine.SkeletonJson(atlasLoader);
-			skeletonData = skeletonJson.readSkeletonData(assetManager.get(dir + name + "/" + name + ".json"));
+			skeletonData = skeletonJson.readSkeletonData(assetManager.get(dir + name + '/' + name + '.json'));
 		} else {
-			skeletonData = skeletonBinary.readSkeletonData(assetManager.get(dir + name + "/" + name + ".skel"));
+			skeletonData = skeletonBinary.readSkeletonData(assetManager.get(dir + name + '/' + name + '.skel'));
 		}
 		var skeleton = new spine.Skeleton(skeletonData);
-		root = skeletonData.findBone("root");
 		skeleton.setSkinByName(skin);
 		var bounds = calculateBounds(skeleton);
 		// Create an AnimationState, and set the initial animation in looping mode.
 		animationStateData = new spine.AnimationStateData(skeleton.data);
 		var animationState = new spine.AnimationState(animationStateData);
-		if(skeleton.data.findAnimation(initialAnimation) == null){
+		if (skeleton.data.findAnimation(initialAnimation) == null) {
 			initialAnimation = skeleton.data.animations[0].name;
 		}
 		animationState.setAnimation(0, initialAnimation, true);
 		// Pack everything up and return to caller.
 		return { skeleton: skeleton, state: animationState, bounds: bounds, premultipliedAlpha: premultipliedAlpha };
 	}
-	function calculateBounds(skeleton) {
+	var calculateBounds = function (skeleton) {
 		skeleton.setToSetupPose();
 		skeleton.updateWorldTransform();
 		var offset = new spine.Vector2();
@@ -263,32 +291,32 @@ function main(
 		skeleton.getBounds(offset, size, []);
 		return { offset: offset, size: size };
 	}
-	function setupAnimationUI(){
-		var animationList = $("#animationList");
+	var setupAnimationUI = function () {
+		var animationList = $('#animationList');
 		animationList.empty();
 		var skeleton = activeSkeleton.skeleton;
 		var state = activeSkeleton.state;
 		var activeAnimation = state.tracks[0].animation.name;
 		for (var i = 0; i < skeleton.data.animations.length; i++) {
 			var name = skeleton.data.animations[i].name;
-			var option = $("<option></option>");
-			option.attr("value", name).text(name);
-			if (name === activeAnimation) option.attr("selected", "selected");
+			var option = $('<option></option>');
+			option.attr('value', name).text(name);
+			if (name === activeAnimation) option.attr('selected', 'selected');
 			animationList.append(option);
 		}
-		animationList.change(function() {
+		animationList.change(function () {
 			var state = activeSkeleton.state;
 			var skeleton = activeSkeleton.skeleton;
-			var animationName = $("#animationList option:selected").text();
+			var animationName = $('#animationList option:selected').text();
 			skeleton.setToSetupPose();
 			state.setAnimation(0, animationName, true);
 		})
-		//reset scaler
-		$("#scaler").val("1.0");
+
+		resetTransform();
 	}
-	function render () {
-		loading.style.display = "none";
-		if(change){
+	var render = function () {
+		loading.style.display = 'none';
+		if (change) {
 			load();
 			return;
 		}
@@ -319,7 +347,7 @@ function main(
 		shader.unbind();
 		requestAnimationFrame(render);
 	}
-	function resize () {
+	var resize = function () {
 		var w = canvas.clientWidth;
 		var h = canvas.clientHeight;
 		var bounds = activeSkeleton.bounds;
@@ -330,15 +358,16 @@ function main(
 		// magic
 		var centerX = bounds.offset.x + bounds.size.x / 2;
 		var centerY = bounds.offset.y + bounds.size.y / 2;
-		var scaleX = bounds.size.x / canvas.width;
-		var scaleY = bounds.size.y / canvas.height;
-		var scale = Math.max(scaleX, scaleY) * 1.2;
-		if (scale < 1) scale = 1;
-		var width = canvas.width * scale;
-		var height = canvas.height * scale;
-		mvp.ortho2d(centerX - width / 2, centerY - height / 2, width, height);
+		// var scaleX = bounds.size.x / canvas.width;
+		// var scaleY = bounds.size.y / canvas.height;
+		// var scale = Math.max(scaleX, scaleY) * 1.2;
+		var width = canvas.width * scaling;
+		var height = canvas.height * scaling;
+		mvp.ortho2d(centerX - offsetX * scaling - width / 2, centerY + offsetY*scaling - height / 2, width, height);
 		gl.viewport(0, 0, canvas.width, canvas.height);
 	}
 
-	init();
+	$(function () {
+		init();
+	});
 }
