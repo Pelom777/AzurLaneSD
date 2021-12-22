@@ -1,9 +1,9 @@
 var load = function (
 	currentSkeleton = 'salatuojia',
-	chosenAnimation = 'normal',
-	dir = 'assets/spine/',
-	nameUrl = 'assets/name.json',
-	byJsonUrl = 'assets/byJson.json'
+	currentAnimation = 'normal',
+	dir = './assets/spine/',
+	nameUrl = './assets/name.json',
+	byJsonUrl = './assets/byJson.json'
 ) {
 	var isMobile;
 	var lastFrameTime = Date.now() / 1000;
@@ -39,7 +39,7 @@ var load = function (
 			if (paramList[0] === nameList[i]) {
 				currentSkeleton = paramList[0];
 				if (paramList[1] != undefined) {
-					chosenAnimation = paramList[1];
+					currentAnimation = paramList[1];
 				}
 				break;
 			}
@@ -102,7 +102,7 @@ var load = function (
 			var skeletonList = $('#skeletonList');
 			skeletonList.html('');
 			for (var skeletonName in nameList) {
-				if (skeletonName.substring(0, this.value.length).indexOf(this.value) == 0) {
+				if (skeletonName.indexOf(this.value) != -1) {
 					var option = $('<option></option>').attr('value', skeletonName).text(skeletonName);
 					if (skeletonName === currentSkeleton) option.attr('selected', 'selected');
 					skeletonList.append(option);
@@ -141,19 +141,19 @@ var load = function (
 				$('#canvas').off('mousemove');
 			})
 		})
-		
+
 		// set reset method
-		$('#reset').on('click', function(){
+		$('#reset').on('click', function () {
 			resetTransform();
 		})
 	}
-	var resetTransform = function(){
+	var resetTransform = function () {
 		// reset scaler
-		if (currentSkeleton.indexOf('_painting') != -1){
+		if (currentSkeleton.indexOf('_painting') != -1) {
 			scaling = 2.0;
 			$('#scaler').val('0.5');
 		}
-		else{
+		else {
 			scaling = 1.0;
 			$('#scaler').val('1.0');
 		}
@@ -212,7 +212,7 @@ var load = function (
 		})
 	}
 	var loadAsset = function (name) {
-		for(var i in nameList[name]){
+		for (var i in nameList[name]) {
 			path = dir + name + '/' + nameList[name][i];
 			if (byJson) {
 				assetManager.loadText(path + '.json');
@@ -237,22 +237,22 @@ var load = function (
 		currentSkeleton = name;
 	}
 	var load = function () {
-		$("#loading").css('display', '');
+		$('#loading').css('display', '');
 		// Wait until the AssetManager has loaded all resources, then load the skeletons.
 		if (assetManager.isLoadingComplete()) {
 			activeSkeleton = [];
-			for(var i in nameList[currentSkeleton]){
+			for (var i in nameList[currentSkeleton]) {
 				path = dir + currentSkeleton + '/' + nameList[currentSkeleton][i];
 				if (currentSkeleton.indexOf('_painting') != -1) {
-					activeSkeleton[i] = loadSkeleton(path, chosenAnimation, true);
+					activeSkeleton[i] = loadSkeleton(path, currentAnimation, true);
 				}
 				else {
-					activeSkeleton[i] = loadSkeleton(path, chosenAnimation, false);
+					activeSkeleton[i] = loadSkeleton(path, currentAnimation, false);
 				}
 			}
 			change = false;
 			byJson = false;
-			chosenAnimation = 'normal';
+			currentAnimation = 'normal';
 			setupAnimationUI();
 			requestAnimationFrame(render);
 		} else {
@@ -312,7 +312,7 @@ var load = function (
 			animationList.append(option);
 		}
 		animationList.change(function () {
-			for(var i in activeSkeleton){
+			for (var i in activeSkeleton) {
 				var state = activeSkeleton[i].state;
 				var skeleton = activeSkeleton[i].skeleton;
 				var animationName = $('#animationList option:selected').text();
@@ -337,7 +337,7 @@ var load = function (
 		gl.clearColor(0.5, 0.5, 0.5, 1);
 		gl.clear(gl.COLOR_BUFFER_BIT);
 		// Apply the animation state based on the delta time.
-		for(var i in activeSkeleton){
+		for (var i in activeSkeleton) {
 			var state = activeSkeleton[i].state;
 			var skeleton = activeSkeleton[i].skeleton;
 			var bounds = activeSkeleton[i].bounds;
@@ -374,7 +374,7 @@ var load = function (
 		// var scale = Math.max(scaleX, scaleY) * 1.2;
 		var width = canvas.width * scaling;
 		var height = canvas.height * scaling;
-		mvp.ortho2d(centerX - offsetX * scaling - width / 2, centerY + offsetY*scaling - height / 2, width, height);
+		mvp.ortho2d(centerX - offsetX * scaling - width / 2, centerY + offsetY * scaling - height / 2, width, height);
 		gl.viewport(0, 0, canvas.width, canvas.height);
 	}
 
