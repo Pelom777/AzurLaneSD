@@ -2,7 +2,7 @@ var load = function (
 	currentSkeleton = 'salatuojia',
 	currentAnimation = 'normal',
 	dir = './assets/spine/',
-	nameUrl = './assets/name.json',
+	nameUrl = './assets/names.json',
 	byJsonUrl = './assets/byJson.json'
 ) {
 	var isMobile;
