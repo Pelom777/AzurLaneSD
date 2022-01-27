@@ -4,6 +4,13 @@ size: 2048,256
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+bangbing
+  rotate: false
+  xy: 295, 5
+  size: 7, 14
+  orig: 7, 14
+  offset: 0, 0
+  index: -1
 biaoqing
   rotate: false
   xy: 1177, 196
@@ -41,21 +48,21 @@ ear
   index: -1
 eye_2_1
   rotate: false
-  xy: 1857, 187
+  xy: 1502, 159
   size: 36, 15
   orig: 36, 15
   offset: 0, 0
   index: -1
 eye_2_2
   rotate: false
-  xy: 982, 103
+  xy: 1042, 158
   size: 26, 16
   orig: 26, 16
   offset: 0, 0
   index: -1
 eye_3_1
   rotate: true
-  xy: 1995, 174
+  xy: 1676, 168
   size: 26, 28
   orig: 26, 28
   offset: 0, 0
@@ -69,14 +76,14 @@ eye_3_2
   index: -1
 eye_4_1
   rotate: false
-  xy: 1963, 177
+  xy: 1610, 170
   size: 30, 24
   orig: 30, 24
   offset: 0, 0
   index: -1
 eye_4_2
   rotate: false
-  xy: 1671, 172
+  xy: 1012, 97
   size: 25, 22
   orig: 25, 22
   offset: 0, 0
@@ -110,8 +117,8 @@ eye_L4
   offset: 0, 0
   index: -1
 eye_L5
-  rotate: false
-  xy: 2025, 172
+  rotate: true
+  xy: 1857, 181
   size: 21, 28
   orig: 21, 28
   offset: 0, 0
@@ -139,14 +146,14 @@ eye_R3
   index: -1
 eye_R4
   rotate: true
-  xy: 1578, 170
+  xy: 1576, 170
   size: 30, 32
   orig: 30, 32
   offset: 0, 0
   index: -1
 eye_R5
   rotate: true
-  xy: 1641, 175
+  xy: 982, 100
   size: 19, 28
   orig: 19, 28
   offset: 0, 0
@@ -195,14 +202,14 @@ hair_R
   index: -1
 han
   rotate: true
-  xy: 1612, 173
+  xy: 1887, 181
   size: 21, 27
   orig: 21, 27
   offset: 0, 0
   index: -1
 hand_L1
   rotate: true
-  xy: 1504, 176
+  xy: 1502, 176
   size: 29, 36
   orig: 29, 36
   offset: 0, 0
@@ -265,16 +272,16 @@ hounaodai
   index: -1
 ji
   rotate: true
-  xy: 1542, 169
+  xy: 1540, 169
   size: 31, 34
   orig: 31, 34
   offset: 0, 0
   index: -1
 ji2
-  rotate: false
-  xy: 1464, 175
-  size: 38, 30
-  orig: 38, 30
+  rotate: true
+  xy: 1464, 171
+  size: 34, 36
+  orig: 34, 36
   offset: 0, 0
   index: -1
 lanzi
@@ -293,7 +300,7 @@ leg_L1
   index: -1
 leg_L2
   rotate: true
-  xy: 1895, 180
+  xy: 1540, 145
   size: 22, 32
   orig: 22, 32
   offset: 0, 0
@@ -307,7 +314,7 @@ leg_R1
   index: -1
 leg_R2
   rotate: true
-  xy: 1929, 179
+  xy: 1642, 172
   size: 22, 32
   orig: 22, 32
   offset: 0, 0
@@ -362,10 +369,24 @@ saihong
   offset: 0, 0
   index: -1
 shaoshang
-  rotate: true
-  xy: 1010, 109
+  rotate: false
+  xy: 1916, 182
   size: 10, 20
   orig: 10, 20
+  offset: 0, 0
+  index: -1
+sho
+  rotate: false
+  xy: 1070, 165
+  size: 11, 9
+  orig: 11, 9
+  offset: 0, 0
+  index: -1
+sho2
+  rotate: false
+  xy: 2038, 245
+  size: 6, 9
+  orig: 6, 9
   offset: 0, 0
   index: -1
 sleep3

@@ -1,376 +1,376 @@
 
 biluokexi_5.png
-size: 1024,512
+size: 2048,256
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 bainzi
   rotate: false
-  xy: 232, 395
+  xy: 2, 3
   size: 142, 115
   orig: 142, 115
   offset: 0, 0
   index: -1
 body
   rotate: true
-  xy: 763, 402
+  xy: 1092, 146
   size: 108, 109
   orig: 108, 109
   offset: 0, 0
   index: -1
 body_B
-  rotate: true
-  xy: 232, 2
+  rotate: false
+  xy: 1135, 106
   size: 42, 38
   orig: 42, 38
   offset: 0, 0
   index: -1
 body_w
-  rotate: false
-  xy: 938, 282
+  rotate: true
+  xy: 370, 4
   size: 45, 48
   orig: 45, 48
   offset: 0, 0
   index: -1
 ear
-  rotate: true
-  xy: 219, 133
+  rotate: false
+  xy: 668, 105
   size: 25, 30
   orig: 25, 30
   offset: 0, 0
   index: -1
 eye_0
-  rotate: true
-  xy: 1006, 418
+  rotate: false
+  xy: 696, 138
   size: 92, 16
   orig: 92, 16
   offset: 0, 0
   index: -1
 eye_1
-  rotate: true
-  xy: 337, 289
+  rotate: false
+  xy: 1203, 152
   size: 104, 30
   orig: 104, 30
   offset: 0, 0
   index: -1
 eye_2
   rotate: true
-  xy: 207, 28
+  xy: 210, 19
   size: 99, 23
   orig: 99, 23
   offset: 0, 0
   index: -1
 eye_3
   rotate: false
-  xy: 508, 362
+  xy: 790, 122
   size: 91, 32
   orig: 91, 32
   offset: 0, 0
   index: -1
 eye_4
   rotate: false
-  xy: 620, 380
+  xy: 1463, 174
   size: 104, 30
   orig: 104, 30
   offset: 0, 0
   index: -1
 eye_5
-  rotate: true
-  xy: 219, 160
+  rotate: false
+  xy: 564, 105
   size: 102, 30
   orig: 102, 30
   offset: 0, 0
   index: -1
 eye_6
   rotate: false
-  xy: 251, 113
+  xy: 235, 14
   size: 85, 49
   orig: 85, 49
   offset: 0, 0
   index: -1
 eye_7
   rotate: false
-  xy: 601, 351
+  xy: 1575, 184
   size: 87, 27
   orig: 87, 27
   offset: 0, 0
   index: -1
 eye_9
-  rotate: true
-  xy: 305, 34
+  rotate: false
+  xy: 420, 13
   size: 77, 38
   orig: 77, 38
   offset: 0, 0
   index: -1
 face_1
-  rotate: false
-  xy: 2, 114
+  rotate: true
+  xy: 421, 115
   size: 139, 141
   orig: 139, 141
   offset: 0, 0
   index: -1
 fashi
   rotate: true
-  xy: 726, 307
+  xy: 971, 103
   size: 51, 82
   orig: 51, 82
   offset: 0, 0
   index: -1
 fx
-  rotate: true
-  xy: 690, 332
+  rotate: false
+  xy: 603, 2
   size: 20, 34
   orig: 20, 34
   offset: 0, 0
   index: -1
 hair_B
   rotate: false
-  xy: 376, 393
+  xy: 564, 137
   size: 130, 117
   orig: 130, 117
   offset: 0, 0
   index: -1
 hair_R3
   rotate: true
-  xy: 644, 412
+  xy: 973, 156
   size: 98, 117
   orig: 98, 117
   offset: 0, 0
   index: -1
 hair_R4
   rotate: true
-  xy: 874, 397
+  xy: 1575, 213
   size: 41, 109
   orig: 41, 109
   offset: 0, 0
   index: -1
 hair_b1
   rotate: false
-  xy: 874, 440
+  xy: 1203, 184
   size: 130, 70
   orig: 130, 70
   offset: 0, 0
   index: -1
 hand_L
-  rotate: false
-  xy: 272, 11
+  rotate: true
+  xy: 1090, 71
   size: 26, 33
   orig: 26, 33
   offset: 0, 0
   index: -1
 hand_L2
-  rotate: true
-  xy: 985, 303
+  rotate: false
+  xy: 1179, 107
   size: 27, 37
   orig: 27, 37
   offset: 0, 0
   index: -1
 hand_L3
-  rotate: false
-  xy: 810, 278
+  rotate: true
+  xy: 322, 2
   size: 47, 46
   orig: 47, 46
   offset: 0, 0
   index: -1
 hand_L4
   rotate: false
-  xy: 870, 266
+  xy: 631, 38
   size: 66, 65
   orig: 66, 65
   offset: 0, 0
   index: -1
 hand_R
-  rotate: true
-  xy: 690, 354
+  rotate: false
+  xy: 577, 2
   size: 24, 34
   orig: 24, 34
   offset: 0, 0
   index: -1
 hand_R2
-  rotate: true
-  xy: 472, 363
+  rotate: false
+  xy: 547, 2
   size: 28, 34
   orig: 28, 34
   offset: 0, 0
   index: -1
 hand_R3
-  rotate: true
-  xy: 938, 237
+  rotate: false
+  xy: 1090, 99
   size: 43, 45
   orig: 43, 45
   offset: 0, 0
   index: -1
 hand_R4
   rotate: false
-  xy: 232, 46
+  xy: 558, 38
   size: 71, 65
   orig: 71, 65
   offset: 0, 0
   index: -1
 hari_L1
   rotate: true
-  xy: 508, 412
+  xy: 837, 156
   size: 98, 134
   orig: 98, 134
   offset: 0, 0
   index: -1
 hari_L2
-  rotate: false
-  xy: 191, 264
+  rotate: true
+  xy: 1463, 206
   size: 48, 110
   orig: 48, 110
   offset: 0, 0
   index: -1
 hari_R1
   rotate: true
-  xy: 945, 332
+  xy: 344, 107
   size: 28, 74
   orig: 28, 74
   offset: 0, 0
   index: -1
 hari_R2
   rotate: false
-  xy: 2, 257
+  xy: 232, 137
   size: 187, 117
   orig: 187, 117
   offset: 0, 0
   index: -1
 hongyun
   rotate: false
-  xy: 2, 4
+  xy: 146, 3
   size: 62, 8
   orig: 62, 8
   offset: 0, 0
   index: -1
 hudiejie
-  rotate: false
-  xy: 945, 362
+  rotate: true
+  xy: 1055, 77
   size: 77, 33
   orig: 77, 33
   offset: 0, 0
   index: -1
 leg_L1
-  rotate: false
-  xy: 467, 293
+  rotate: true
+  xy: 625, 10
   size: 26, 44
   orig: 26, 44
   offset: 0, 0
   index: -1
 leg_L2
   rotate: false
-  xy: 300, 2
+  xy: 1309, 152
   size: 22, 30
   orig: 22, 30
   offset: 0, 0
   index: -1
 leg_R1
-  rotate: false
-  xy: 985, 255
+  rotate: true
+  xy: 499, 11
   size: 26, 46
   orig: 26, 46
   offset: 0, 0
   index: -1
 leg_R2
   rotate: true
-  xy: 472, 339
+  xy: 1333, 156
   size: 22, 32
   orig: 22, 32
   offset: 0, 0
   index: -1
 lianhei
-  rotate: true
-  xy: 143, 129
+  rotate: false
+  xy: 1335, 180
   size: 126, 74
   orig: 126, 74
   offset: 0, 0
   index: -1
 manjuuuu
   rotate: false
-  xy: 2, 14
+  xy: 696, 156
   size: 139, 98
   orig: 139, 98
   offset: 0, 0
   index: -1
 meimao_1
   rotate: false
-  xy: 241, 338
+  xy: 1887, 199
   size: 94, 55
   orig: 94, 55
   offset: 0, 0
   index: -1
 meimao_2
   rotate: false
-  xy: 369, 343
+  xy: 1686, 206
   size: 101, 48
   orig: 101, 48
   offset: 0, 0
   index: -1
 meimao_3
   rotate: false
-  xy: 2, 376
+  xy: 2, 120
   size: 228, 134
   orig: 228, 134
   offset: 0, 0
   index: -1
 meimao_33
   rotate: false
-  xy: 251, 220
+  xy: 420, 53
   size: 80, 60
   orig: 80, 60
   offset: 0, 0
   index: -1
 meimao_4
   rotate: false
-  xy: 241, 282
+  xy: 235, 65
   size: 94, 54
   orig: 94, 54
   offset: 0, 0
   index: -1
 meimao_5
   rotate: false
-  xy: 369, 288
+  xy: 1789, 201
   size: 96, 53
   orig: 96, 53
   offset: 0, 0
   index: -1
 meimao_6
   rotate: false
-  xy: 251, 164
+  xy: 331, 51
   size: 81, 54
   orig: 81, 54
   offset: 0, 0
   index: -1
 meimao_7
   rotate: true
-  xy: 814, 326
+  xy: 502, 39
   size: 74, 54
   orig: 74, 54
   offset: 0, 0
   index: -1
 sleep6
   rotate: false
-  xy: 726, 360
+  xy: 883, 114
   size: 86, 40
   orig: 86, 40
   offset: 0, 0
   index: -1
 weapon1
-  rotate: true
-  xy: 870, 333
+  rotate: false
+  xy: 1983, 181
   size: 62, 73
   orig: 62, 73
   offset: 0, 0
   index: -1
 weapon2
   rotate: false
-  xy: 143, 22
+  xy: 146, 13
   size: 62, 105
   orig: 62, 105
   offset: 0, 0
   index: -1
 yandou
   rotate: true
-  xy: 508, 396
+  xy: 232, 121
   size: 14, 110
   orig: 14, 110
   offset: 0, 0
