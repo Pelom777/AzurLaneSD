@@ -61,8 +61,7 @@ var load = function (
 	var setupUI = function () {
 		// set options
 		var skeletonList = $('#skeletonList');
-		for (var i in nameList) {
-			var skeletonName = nameList[i];
+		for (var skeletonName in nameList) {
 			var option = $('<option></option>').attr('value', skeletonName).text(skeletonName);
 			if (skeletonName === currentSkeleton) option.attr('selected', 'selected');
 			skeletonList.append(option);
