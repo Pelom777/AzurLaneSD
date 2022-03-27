@@ -129,6 +129,21 @@ var load = function (
 		$('#scaler').on('input', function () {
 			scaling = 1.0 / this.value;
 		})
+		$('#canvas').on('wheel', function (e) {
+			if (e.originalEvent.wheelDelta > 0) {
+				scaling *= 0.9;
+			}
+			else {
+				scaling *= 1.1;
+			}
+			if (scaling > 5.0) {
+				scaling = 5.0;
+			}
+			if (scaling < 0.5) {
+				scaling = 0.5;
+			}
+			$('#scaler').val(1.0 / scaling);
+		})
 
 		// set translate method
 		$('#canvas').on('mousedown', function (e) {
