@@ -191,8 +191,8 @@ var load = function (
 		// Setup canvas and WebGL context. We pass alpha: false to canvas.getContext() so we don't use premultiplied alpha when
 		// loading textures. That is handled separately by PolygonBatcher.
 		canvas = document.getElementById('canvas');
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
+		canvas.width = window.innerWidth * 2;
+		canvas.height = window.innerHeight * 2;
 		var config = { alpha: false };
 		gl = canvas.getContext('webgl', config) || canvas.getContext('experimental-webgl', config);
 		if (!gl) {
@@ -283,7 +283,7 @@ var load = function (
 		// var skeletonBinary = new spine.SkeletonBinary(atlasLoader);
 		var skeletonBinary = new spine.SkeletonBinary(atlasLoader);
 		// Set the scale to apply during parsing, parse the file, and create a new skeleton.
-		skeletonBinary.scale = isMobile ? 0.75 : 1;
+		skeletonBinary.scale = 2;
 		var skeletonData;
 		if (byJson) {
 			var skeletonJson = new spine.SkeletonJson(atlasLoader);
@@ -376,9 +376,9 @@ var load = function (
 		var w = canvas.clientWidth;
 		var h = canvas.clientHeight;
 		var bounds = activeSkeleton[0].bounds;
-		if (canvas.width != w || canvas.height != h) {
-			canvas.width = w;
-			canvas.height = h;
+		if (canvas.width != w * 2 || canvas.height != h * 2) {
+			canvas.width = w * 2;
+			canvas.height = h * 2;
 		}
 		// magic
 		var centerX = bounds.offset.x + bounds.size.x / 2;
@@ -388,7 +388,7 @@ var load = function (
 		// var scale = Math.max(scaleX, scaleY) * 1.2;
 		var width = canvas.width * scaling;
 		var height = canvas.height * scaling;
-		mvp.ortho2d(centerX - offsetX * scaling - width / 2, centerY + offsetY * scaling - height / 2, width, height);
+		mvp.ortho2d(centerX - offsetX * scaling * 2 - width / 2, centerY + offsetY * scaling * 2 - height / 2, width, height);
 		gl.viewport(0, 0, canvas.width, canvas.height);
 	}
 
