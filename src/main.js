@@ -68,14 +68,14 @@ var load = function (
 		}
 		skeletonList.change(function () {
 			choose($('#skeletonList option:selected').text());
-		})
+		});
 		if (byJsonUrl != '') {
 			$.getJSON(byJsonUrl, function (data) {
 				byJsonList = eval(data);
-			})
+			});
 		}
 
-		// set Selectable searchbox
+		// set selectable searchbox
 		$(function () {
 			$('#skeletonBox').attr('value', currentSkeleton);
 			$(document).on('click', function (e) {
@@ -89,15 +89,14 @@ var load = function (
 				}
 				$('#skeletonList').css('display', 'none');
 			});
-		})
+		});
 		$('#skeletonList').on('change', function () {
 			$(this).prev('input').val($(this).find('option:selected').text());
 			$('#skeletonList').css('display', 'none');
-		})
+		});
 		$('#skeletonBox').on('focus', function () {
 			$('#skeletonList').css('display', '');
-		})
-		$('#skeletonBox').on('input', function () {
+		}).on('input', function () {
 			var skeletonList = $('#skeletonList');
 			skeletonList.html('');
 			for (var skeletonName in nameList) {
@@ -107,7 +106,7 @@ var load = function (
 					skeletonList.append(option);
 				}
 			}
-		})
+		});
 
 		// set share method
 		$('#share').on('click', function () {
@@ -117,18 +116,13 @@ var load = function (
 			input.select();
 			document.execCommand('copy');
 			input.remove();
-		})
-		$('#share').on('mouseenter', function () {
-			showMessage('点击左上分享按钮，即可将当前角色及动作分享给他人', 4000);
-		})
-		$('#share').on('click', function () {
 			showMessage('链接已复制至剪贴板', 1000);
-		})
+		});
 
 		// set scale method
 		$('#scaler').on('input', function () {
 			scaling = 1.0 / this.value;
-		})
+		});
 		$('#canvas').on('wheel', function (e) {
 			if (e.originalEvent.wheelDelta > 0) {
 				scaling *= 0.9;
@@ -143,23 +137,71 @@ var load = function (
 				scaling = 0.5;
 			}
 			$('#scaler').val(1.0 / scaling);
-		})
+		});
 
 		// set translate method
 		$('#canvas').on('mousedown', function (e) {
+			if (e.which != 1) {
+				return;
+			}
 			var startX = e.clientX, startY = e.clientY;
-			$('#canvas').on('mousemove', function (e) {
+			$(this).on('mousemove', function (e) {
 				offsetX += e.clientX - startX, offsetY += e.clientY - startY;
 				startX = e.clientX, startY = e.clientY;
 			}).on('mouseup', function () {
-				$('#canvas').off('mousemove');
-			})
-		})
+				$(this).off('mousemove');
+			});
+		});
 
 		// set reset method
 		$('#reset').on('click', function () {
 			resetTransform();
-		})
+		});
+
+		//set capture method
+		$('#capture').on('click', function () {
+			canvas.toBlob(function (blob) {
+				var url = URL.createObjectURL(blob);
+				$('#screenshot>img').attr('src', url);
+			});
+			$('#screenshot').css('display', 'block');
+		});
+		$('#screenshot').on('mousedown', function (e) {
+			if (e.which == 1) {
+				e.preventDefault();
+				var sx, sy, ex, ey;
+				sx = e.clientX, sy = e.clientY;
+				$(this).css({
+					'--sx': sx + 'px',
+					'--sy': sy + 'px'
+				}).on('mousemove', function (e) {
+					ex = e.clientX, ey = e.clientY;
+					$(this).css({
+						'--ex': ex + 'px',
+						'--ey': ey + 'px'
+					});
+				}).on('mouseup', function () {
+					var cvs = $('<canvas></canvas>')[0];
+					var ctx = cvs.getContext('2d');
+					var dx = Math.abs(ex - sx), dy = Math.abs(ey - sy);
+					cvs.width = dx, cvs.height = dy;
+					ctx.drawImage($(this).children()[0], sx * 2, sy * 2, dx * 2, dy * 2, 0, 0, dx, dy);
+					cvs.toBlob(function (blob) {
+						var url = URL.createObjectURL(blob);
+						var a = $('<a></a>').attr({
+							'href': url,
+							'download': currentSkeleton + '_' + currentAnimation
+						});
+						a[0].click();
+					});
+					showMessage('截图成功', 1000);
+					$(this).attr('style', '').off('mousemove').off('mouseup');
+				});
+			}
+			else if (e.which == 3) {
+				$(this).css('display', 'none');
+			}
+		});
 	}
 	var resetTransform = function () {
 		// reset scaler
@@ -193,7 +235,7 @@ var load = function (
 		canvas = document.getElementById('canvas');
 		canvas.width = window.innerWidth * 2;
 		canvas.height = window.innerHeight * 2;
-		var config = { alpha: false };
+		var config = { alpha: false, preserveDrawingBuffer: true };
 		gl = canvas.getContext('webgl', config) || canvas.getContext('experimental-webgl', config);
 		if (!gl) {
 			alert('WebGL is unavailable.');
@@ -223,7 +265,7 @@ var load = function (
 			loadAsset(currentSkeleton);
 
 			requestAnimationFrame(load);
-		})
+		});
 	}
 	var loadAsset = function (name) {
 		for (var i in nameList[name]) {
@@ -329,11 +371,11 @@ var load = function (
 			for (var i in activeSkeleton) {
 				var state = activeSkeleton[i].state;
 				var skeleton = activeSkeleton[i].skeleton;
-				var animationName = $('#animationList option:selected').text();
+				currentAnimation = $('#animationList option:selected').text();
 				skeleton.setToSetupPose();
-				state.setAnimation(0, animationName, true);
+				state.setAnimation(0, currentAnimation, true);
 			}
-		})
+		});
 
 		resetTransform();
 	}
@@ -348,7 +390,7 @@ var load = function (
 		lastFrameTime = now;
 		// Update the MVP matrix to adjust for canvas size changes
 		resize();
-		gl.clearColor(0.5, 0.5, 0.5, 1);
+		gl.clearColor(0.5, 0.5, 0.5, 1.0);
 		gl.clear(gl.COLOR_BUFFER_BIT);
 		// Apply the animation state based on the delta time.
 		for (var i in activeSkeleton) {
