@@ -20,14 +20,14 @@ body_main
   index: -1
 body_t1_1
   rotate: true
-  xy: 1496, 115
+  xy: 695, 31
   size: 19, 29
   orig: 19, 29
   offset: 0, 0
   index: -1
 body_t1_2
   rotate: true
-  xy: 1573, 161
+  xy: 332, 18
   size: 22, 26
   orig: 22, 26
   offset: 0, 0
@@ -61,8 +61,8 @@ body_tr1
   offset: 0, 0
   index: -1
 body_tr2
-  rotate: false
-  xy: 263, 3
+  rotate: true
+  xy: 563, 20
   size: 32, 47
   orig: 32, 47
   offset: 0, 0
@@ -103,8 +103,8 @@ chibang_r
   offset: 0, 0
   index: -1
 ear
-  rotate: false
-  xy: 1127, 114
+  rotate: true
+  xy: 1618, 156
   size: 27, 31
   orig: 27, 31
   offset: 0, 0
@@ -194,8 +194,8 @@ fashi_F
   offset: 0, 0
   index: -1
 fashi_L1
-  rotate: true
-  xy: 629, 6
+  rotate: false
+  xy: 1294, 78
   size: 44, 76
   orig: 44, 76
   offset: 0, 0
@@ -265,21 +265,21 @@ hand_R1
   index: -1
 hand_R2
   rotate: true
-  xy: 1428, 108
+  xy: 263, 24
   size: 26, 33
   orig: 26, 33
   offset: 0, 0
   index: -1
 handi_6
   rotate: false
-  xy: 1052, 117
+  xy: 263, 2
   size: 70, 12
   orig: 70, 12
   offset: 0, 0
   index: -1
 handi_7
   rotate: true
-  xy: 1548, 137
+  xy: 360, 18
   size: 22, 26
   orig: 22, 26
   offset: 0, 0
@@ -293,7 +293,7 @@ jianzhuang_L
   index: -1
 jianzhuang_L2
   rotate: true
-  xy: 297, 7
+  xy: 612, 17
   size: 33, 81
   orig: 33, 81
   offset: 0, 0
@@ -321,21 +321,21 @@ jianzhuang_R
   index: -1
 jianzhuang_R2
   rotate: true
-  xy: 554, 11
+  xy: 1418, 94
   size: 40, 73
   orig: 40, 73
   offset: 0, 0
   index: -1
 jianzhuang_R3
-  rotate: false
-  xy: 1294, 78
+  rotate: true
+  xy: 1340, 95
   size: 42, 76
   orig: 42, 76
   offset: 0, 0
   index: -1
 jianzhuang_Rc
   rotate: false
-  xy: 1338, 95
+  xy: 563, 54
   size: 64, 42
   orig: 64, 42
   offset: 0, 0
@@ -370,28 +370,28 @@ jianzhuang_bx
   index: -1
 leg_L1
   rotate: true
-  xy: 452, 4
+  xy: 1493, 108
   size: 26, 46
   orig: 26, 46
   offset: 0, 0
   index: -1
 leg_L2
   rotate: true
-  xy: 1463, 112
+  xy: 1651, 161
   size: 22, 31
   orig: 22, 31
   offset: 0, 0
   index: -1
 leg_R1
   rotate: true
-  xy: 500, 11
+  xy: 1573, 157
   size: 26, 43
   orig: 26, 43
   offset: 0, 0
   index: -1
 leg_R2
-  rotate: false
-  xy: 1404, 105
+  rotate: true
+  xy: 298, 18
   size: 22, 32
   orig: 22, 32
   offset: 0, 0
@@ -468,7 +468,7 @@ saihong
   index: -1
 saihong_3
   rotate: false
-  xy: 380, 9
+  xy: 1052, 131
   size: 70, 14
   orig: 70, 14
   offset: 0, 0
@@ -482,14 +482,14 @@ saihong_4
   index: -1
 saihong_6
   rotate: false
-  xy: 1338, 76
+  xy: 1415, 75
   size: 81, 17
   orig: 81, 17
   offset: 0, 0
   index: -1
 saihong_7
   rotate: false
-  xy: 1052, 131
+  xy: 1340, 79
   size: 73, 14
   orig: 73, 14
   offset: 0, 0
@@ -523,16 +523,16 @@ yizi
   offset: 0, 0
   index: -1
 zhupao_L
-  rotate: false
-  xy: 500, 39
-  size: 52, 71
-  orig: 52, 71
+  rotate: true
+  xy: 500, 64
+  size: 46, 61
+  orig: 46, 61
   offset: 0, 0
   index: -1
 zhupao_R
   rotate: true
-  xy: 554, 53
-  size: 43, 74
-  orig: 43, 74
+  xy: 500, 16
+  size: 46, 61
+  orig: 46, 61
   offset: 0, 0
   index: -1
